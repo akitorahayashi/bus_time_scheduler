@@ -53,14 +53,22 @@ class BusScheduleTimeTable: UIView, UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: BusScheduleCell.identifier, for: indexPath) as! BusScheduleCell
+        
         if let schedule = presenter.busSchedule(at: indexPath.row) {
             cell.configure(with: schedule)
+        } else {
+            assertionFailure()
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+                     
+        let currentSelectedIndex = presenter.currentSelectedIndex
         presenter.toggleSelection(at: indexPath.row)
-        tableView.reloadData()
+        if let currentSelectedIndex {
+            tableView.reloadRows(at: [.init(row: currentSelectedIndex, section: 0)], with: .automatic)
+        }
+        tableView.reloadRows(at: [indexPath], with: .automatic)
     }
 }

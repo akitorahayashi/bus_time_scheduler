@@ -10,6 +10,12 @@ import UIKit
 class BusScheduleCell: UITableViewCell {
     static let identifier = "BusScheduleCell"
     
+    override var isSelected: Bool {
+        didSet {
+            print("isSelected", isSelected)
+        }
+    }
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16)
@@ -35,6 +41,17 @@ class BusScheduleCell: UITableViewCell {
     
     func configure(with schedule: BusSchedule) {
         titleLabel.text = schedule.arrivalTime
-        contentView.backgroundColor = schedule.isSelected ? UIColor.accent.withAlphaComponent(0.2) : .clear
+        
+        let animates = true
+        
+        if animates {
+            let animator = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 1)
+            animator.addAnimations {
+                self.contentView.backgroundColor = schedule.isSelected ? UIColor.accent.withAlphaComponent(0.2) : .clear
+            }
+            animator.startAnimation()
+        } else {
+            self.contentView.backgroundColor = schedule.isSelected ? UIColor.accent.withAlphaComponent(0.2) : .clear
+        }
     }
 }

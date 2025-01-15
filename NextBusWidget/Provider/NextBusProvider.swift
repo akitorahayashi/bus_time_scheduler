@@ -10,25 +10,22 @@ import SwiftUI
 
 struct NextBusProvider: TimelineProvider {
     func placeholder(in context: Context) -> NextBusEntry {
-        NextBusEntry(date: Date())
+        NextBusEntry(date: Date(), busSchedules: kBusSchedules, selectedBusScheduleIndex: nil)
     }
 
     func getSnapshot(in context: Context, completion: @escaping (NextBusEntry) -> ()) {
-        let entry = NextBusEntry(date: Date())
+        let entry = NextBusEntry(date: Date(), busSchedules: kBusSchedules, selectedBusScheduleIndex: nil)
         completion(entry)
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<NextBusEntry>) -> ()) {
         var entries: [NextBusEntry] = []
 
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-        let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = NextBusEntry(date: entryDate)
-            entries.append(entry)
-        }
-
+        let schedules = kBusSchedules
+        let selectedIndex: Int? = 1
+        
+        let entry = NextBusEntry(date: Date(), busSchedules: schedules, selectedBusScheduleIndex: selectedIndex)
+        entries.append(entry)
         let timeline = Timeline(entries: entries, policy: .atEnd)
         completion(timeline)
     }

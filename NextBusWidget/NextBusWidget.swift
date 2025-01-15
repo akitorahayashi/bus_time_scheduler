@@ -31,5 +31,5 @@ struct NextBusWidget: Widget {
 #Preview(as: .systemSmall) {
     NextBusWidget()
 } timeline: {
-    NextBusEntry(date: .now)
+    NextBusEntry(date: .now, busSchedules: [], selectedBusScheduleIndex: nil)
 }

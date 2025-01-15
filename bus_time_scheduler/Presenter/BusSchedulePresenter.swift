@@ -49,6 +49,20 @@ class BusSchedulePresenter {
         }
     }
     
+//    func clearCurrentSelection() {
+//        guard let currentSelectedIndex else {
+//            return
+//        }
+//        
+//        busSchedules[currentSelectedIndex].isSelected = false
+//    }
+//    
+    var currentSelectedIndex: Int? {
+        busSchedules.firstIndex {
+            $0.isSelected
+        }
+    }
+    
     func nearestScheduleIndex(currentTime: String) -> Int? {
         return busSchedules.firstIndex(where: { $0.arrivalTime >= currentTime })
     }
