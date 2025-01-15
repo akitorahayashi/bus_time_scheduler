@@ -25,6 +25,7 @@ class BusScheduleTimeTable: UIView, UITableViewDataSource, UITableViewDelegate {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = 80
+        tableView.transform = CGAffineTransform(scaleX: 1, y: -1)
         tableView.register(BusScheduleCell.self, forCellReuseIdentifier: BusScheduleCell.identifier)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(tableView)
@@ -38,7 +39,12 @@ class BusScheduleTimeTable: UIView, UITableViewDataSource, UITableViewDelegate {
     }
     
     func scrollToNearestTime() {
-        let currentTimeString = DateFormatter.localizedString(from: Date(), dateStyle: .none, timeStyle: .short)
+        let currentDate = kDebugMode
+        // 今日の16時。年月日はその日に合わせる。
+        ? Calendar.current.date(bySettingHour: 16, minute: 0, second: 0, of: Date())!
+        // 現在時刻
+        : Date()
+        let currentTimeString = DateFormatter.localizedString(from: currentDate, dateStyle: .none, timeStyle: .short)
         if let nearestIndex = presenter.nearestScheduleIndex(currentTime: currentTimeString) {
             DispatchQueue.main.async {
                 self.tableView.scrollToRow(at: IndexPath(row: nearestIndex, section: 0), at: .top, animated: true)
@@ -56,7 +62,10 @@ class BusScheduleTimeTable: UIView, UITableViewDataSource, UITableViewDelegate {
         
         if let schedule = presenter.busSchedule(at: indexPath.row) {
             cell.configure(with: schedule)
+            // これがあることでチカチカ光る現象を防げる。別でハイライトの処理はある。
             cell.selectionStyle = .none
+            // tableViewを反転させた影響で、Cellも反転させることでUIを整える
+            cell.transform = CGAffineTransform(scaleX: 1, y: -1)
         } else {
             assertionFailure()
         }
