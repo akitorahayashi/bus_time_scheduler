@@ -33,4 +33,13 @@ class CardButton: UIButton {
         self.layer.borderColor = UIColor.accent.cgColor
         self.layer.cornerRadius = 10
     }
+    
+    // タップ時に薄くなる視覚効果
+    override var isHighlighted: Bool {
+        didSet {
+            UIView.animate(withDuration: 0.2) {
+                self.alpha = self.isHighlighted ? 0.5 : 1.0
+            }
+        }
+    }
 }
