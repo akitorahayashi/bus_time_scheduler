@@ -14,7 +14,7 @@ class BusSchedulePresenter {
         }
     }
     
-    private(set) var selectedIndex: Int? {
+    private(set) var selectedBusScheduleIndex: Int? {
         didSet {
             saveSelectedIndex()
         }
@@ -22,7 +22,7 @@ class BusSchedulePresenter {
 
     init(busSchedules: [BusSchedule] = []) {
         self.busSchedules = busSchedules
-        self.selectedIndex = nil
+        self.selectedBusScheduleIndex = nil
         loadData()
     }
     
@@ -37,15 +37,15 @@ class BusSchedulePresenter {
     
     func toggleSelection(at index: Int) {
         guard index >= 0 && index < busSchedules.count else { return }
-        if selectedIndex == index {
+        if selectedBusScheduleIndex == index {
             busSchedules[index].isSelected = false
-            selectedIndex = nil
+            selectedBusScheduleIndex = nil
         } else {
-            if let previousIndex = selectedIndex {
+            if let previousIndex = selectedBusScheduleIndex {
                 busSchedules[previousIndex].isSelected = false
             }
             busSchedules[index].isSelected = true
-            selectedIndex = index
+            selectedBusScheduleIndex = index
         }
     }
     
@@ -65,7 +65,7 @@ class BusSchedulePresenter {
     private func saveSelectedIndex() {
         let userDefaults = UserDefaults(suiteName: UserDefaultsManager.suitName)
         if let userDefaults = userDefaults {
-            userDefaults.set(selectedIndex, forKey: UserDefaultsManager.selectedIndexKey)
+            userDefaults.set(selectedBusScheduleIndex, forKey: UserDefaultsManager.selectedIndexKey)
         }
     }
     
@@ -79,6 +79,6 @@ class BusSchedulePresenter {
             busSchedules = kBusSchedules
         }
         
-        selectedIndex = userDefaults?.integer(forKey: UserDefaultsManager.selectedIndexKey)
+        selectedBusScheduleIndex = userDefaults?.integer(forKey: UserDefaultsManager.selectedIndexKey)
     }
 }
