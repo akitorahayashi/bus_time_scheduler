@@ -7,6 +7,8 @@
 
 import UIKit
 
+let kDebugMode: Bool = true
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
