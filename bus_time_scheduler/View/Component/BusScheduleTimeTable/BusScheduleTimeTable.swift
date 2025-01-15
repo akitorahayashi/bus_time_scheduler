@@ -56,6 +56,7 @@ class BusScheduleTimeTable: UIView, UITableViewDataSource, UITableViewDelegate {
         
         if let schedule = presenter.busSchedule(at: indexPath.row) {
             cell.configure(with: schedule)
+            cell.selectionStyle = .none
         } else {
             assertionFailure()
         }
