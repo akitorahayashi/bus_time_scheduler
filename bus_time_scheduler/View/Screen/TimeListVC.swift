@@ -11,16 +11,12 @@
 import UIKit
 
 class TimeListVC: UIViewController {
-    private var busSchedules: [BusSchedule]
-    
-    // MARK: - Components
-    private var busScheduleTimeTable: BusScheduleTimeTable
+    private let presenter: BusSchedulePresenter
+    private var busScheduleTimeTable: BusScheduleTimeTable!
     private let scrollToNextBusButton = CardButton()
     
-    // MARK: - Initializer
     init(busSchedules: [BusSchedule]) {
-        self.busSchedules = busSchedules
-        self.busScheduleTimeTable = BusScheduleTimeTable(busSchedules: busSchedules)
+        self.presenter = BusSchedulePresenter(busSchedules: busSchedules)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -28,7 +24,6 @@ class TimeListVC: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Lifecycle Methods
     override func loadView() {
         super.loadView()
         setupUI()
@@ -39,33 +34,23 @@ class TimeListVC: UIViewController {
         busScheduleTimeTable.scrollToNearestTime()
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
-    // MARK: - Setup UI
     private func setupUI() {
         view.backgroundColor = .systemBackground
         
-        
-        // Initialize BusScheduleTimeTable
-        busScheduleTimeTable = BusScheduleTimeTable(busSchedules: busSchedules)
+        busScheduleTimeTable = BusScheduleTimeTable(presenter: presenter)
         view.addSubview(busScheduleTimeTable)
         busScheduleTimeTable.translatesAutoresizingMaskIntoConstraints = false
         
-        // Divider
         let divider = UIView()
         divider.backgroundColor = .systemGray6
         divider.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(divider)
         
-        // Button
         scrollToNextBusButton.setTitle("Show next bus on top", for: .normal)
         scrollToNextBusButton.addTarget(self, action: #selector(scrollToNearestTimeButtonTapped), for: .touchUpInside)
         scrollToNextBusButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scrollToNextBusButton)
         
-        // Layout Constraints for other components
         NSLayoutConstraint.activate([
             busScheduleTimeTable.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             busScheduleTimeTable.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -84,7 +69,6 @@ class TimeListVC: UIViewController {
         ])
     }
     
-    // MARK: - Button Action
     @objc private func scrollToNearestTimeButtonTapped() {
         busScheduleTimeTable.scrollToNearestTime()
     }
