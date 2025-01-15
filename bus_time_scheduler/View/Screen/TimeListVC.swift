@@ -11,21 +11,12 @@
 import UIKit
 
 class TimeListVC: UIViewController {
-    private let presenter: BusSchedulePresenter
+    private let presenter = BusSchedulePresenter()
     private var busScheduleTimeTable: BusScheduleTimeTable!
     private let scrollToNextBusButton = CardButton()
     
-    init(busSchedules: [BusSchedule]) {
-        self.presenter = BusSchedulePresenter(busSchedules: busSchedules)
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func loadView() {
-        super.loadView()
+    override func viewDidLoad() {
+        super.viewDidLoad()
         setupUI()
     }
     
@@ -37,14 +28,17 @@ class TimeListVC: UIViewController {
     private func setupUI() {
         view.backgroundColor = .systemBackground
         
+        // 中央のタイトル設定
+        let appNameLabel = UILabel()
+        appNameLabel.text = "Bus Time Scheduler"
+        appNameLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        appNameLabel.textAlignment = .center
+        appNameLabel.textColor = .accent
+        navigationItem.titleView = appNameLabel
+        
         busScheduleTimeTable = BusScheduleTimeTable(presenter: presenter)
         view.addSubview(busScheduleTimeTable)
         busScheduleTimeTable.translatesAutoresizingMaskIntoConstraints = false
-        
-        let divider = UIView()
-        divider.backgroundColor = .systemGray6
-        divider.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(divider)
         
         scrollToNextBusButton.setTitle("Show next bus on top", for: .normal)
         scrollToNextBusButton.addTarget(self, action: #selector(scrollToNearestTimeButtonTapped), for: .touchUpInside)
@@ -55,12 +49,7 @@ class TimeListVC: UIViewController {
             busScheduleTimeTable.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             busScheduleTimeTable.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             busScheduleTimeTable.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            busScheduleTimeTable.bottomAnchor.constraint(equalTo: divider.topAnchor, constant: -12),
-            
-            divider.heightAnchor.constraint(equalToConstant: 2),
-            divider.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            divider.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            divider.bottomAnchor.constraint(equalTo: scrollToNextBusButton.topAnchor, constant: -12),
+            busScheduleTimeTable.bottomAnchor.constraint(equalTo: scrollToNextBusButton.topAnchor, constant: -20),
             
             scrollToNextBusButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             scrollToNextBusButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),

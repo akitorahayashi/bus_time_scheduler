@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         self.window = window
         window.backgroundColor = .systemBackground
-        window.rootViewController = UINavigationController(rootViewController: TimeListVC(busSchedules: kBusSchedules))
+        window.rootViewController = UINavigationController(rootViewController: TimeListVC())
         window.makeKeyAndVisible()
     }
 

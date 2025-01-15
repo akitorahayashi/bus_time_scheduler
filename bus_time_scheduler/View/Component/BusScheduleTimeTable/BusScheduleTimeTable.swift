@@ -8,11 +8,9 @@
 import UIKit
 
 class BusScheduleTimeTable: UIView, UITableViewDataSource, UITableViewDelegate {
-    // MARK: - Properties
     private let presenter: BusSchedulePresenter
     private let tableView = UITableView()
     
-    // MARK: - Initializer
     init(presenter: BusSchedulePresenter) {
         self.presenter = presenter
         super.init(frame: .zero)
@@ -23,14 +21,13 @@ class BusScheduleTimeTable: UIView, UITableViewDataSource, UITableViewDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Setup UI
     private func setupUI() {
-        addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.rowHeight = 80
         tableView.register(BusScheduleCell.self, forCellReuseIdentifier: BusScheduleCell.identifier)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.rowHeight = 80
+        addSubview(tableView)
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: topAnchor),
@@ -41,11 +38,7 @@ class BusScheduleTimeTable: UIView, UITableViewDataSource, UITableViewDelegate {
     }
     
     func scrollToNearestTime() {
-        let currentDate = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm"
-        let currentTimeString = dateFormatter.string(from: currentDate)
-        
+        let currentTimeString = DateFormatter.localizedString(from: Date(), dateStyle: .none, timeStyle: .short)
         if let nearestIndex = presenter.nearestScheduleIndex(currentTime: currentTimeString) {
             DispatchQueue.main.async {
                 self.tableView.scrollToRow(at: IndexPath(row: nearestIndex, section: 0), at: .top, animated: true)
@@ -53,15 +46,14 @@ class BusScheduleTimeTable: UIView, UITableViewDataSource, UITableViewDelegate {
         }
     }
     
+    // MARK: - UITableViewDataSource & UITableViewDelegate
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.numberOfSchedules()
+        return presenter.numberOfSchedules
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: BusScheduleCell.identifier, for: indexPath) as? BusScheduleCell else {
-            return UITableViewCell()
-        }
-        if let schedule = presenter.schedule(at: indexPath.row) {
+        let cell = tableView.dequeueReusableCell(withIdentifier: BusScheduleCell.identifier, for: indexPath) as! BusScheduleCell
+        if let schedule = presenter.busSchedule(at: indexPath.row) {
             cell.configure(with: schedule)
         }
         return cell
