@@ -75,6 +75,8 @@ class BusSchedulePresenter {
            let savedSchedulesData = userDefaults.data(forKey: UserDefaultsManager.busSchedulesKey),
            let savedSchedules = try? JSONDecoder().decode([BusSchedule].self, from: savedSchedulesData) {
             busSchedules = savedSchedules
+        } else {
+            busSchedules = kBusSchedules
         }
         
         selectedIndex = userDefaults?.integer(forKey: UserDefaultsManager.selectedIndexKey)
