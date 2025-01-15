@@ -22,7 +22,7 @@ class CardButton: UIButton {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setupButton()
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func setupButton() {

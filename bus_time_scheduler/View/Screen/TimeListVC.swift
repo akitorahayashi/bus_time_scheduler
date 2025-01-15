@@ -12,9 +12,20 @@ import UIKit
 
 class TimeListVC: UIViewController {
     private let presenter = BusSchedulePresenter()
-    private var busScheduleTimeTable: BusScheduleTimeTable!
+    private var busScheduleTimeTable: BusScheduleTimeTable
     private let scrollToNextBusButton = CardButton()
     
+    init() {
+        self.busScheduleTimeTable = BusScheduleTimeTable(presenter: presenter)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -25,6 +36,7 @@ class TimeListVC: UIViewController {
         busScheduleTimeTable.scrollToNearestTime()
     }
     
+    // MARK: - Setup UI
     private func setupUI() {
         view.backgroundColor = .systemBackground
         
@@ -36,7 +48,6 @@ class TimeListVC: UIViewController {
         appNameLabel.textColor = .accent
         navigationItem.titleView = appNameLabel
         
-        busScheduleTimeTable = BusScheduleTimeTable(presenter: presenter)
         view.addSubview(busScheduleTimeTable)
         busScheduleTimeTable.translatesAutoresizingMaskIntoConstraints = false
         
