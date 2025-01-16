@@ -15,12 +15,14 @@ struct NextBusWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: NextBusProvider()) { entry in
             if #available(iOS 17.0, *) {
+                // Missing argument for parameter 'widgetFamily' in call
                 NextBusWidgetEntryView(entry: entry)
                     .containerBackground(.fill.tertiary, for: .widget)
             } else {
                 NextBusWidgetEntryView(entry: entry)
                     .padding()
-                    .background()
+                    .background(Color(UIColor.systemBackground))
+                    .cornerRadius(10)
             }
         }
         .configurationDisplayName("Next Bus Widget")
@@ -31,5 +33,6 @@ struct NextBusWidget: Widget {
 #Preview(as: .systemSmall) {
     NextBusWidget()
 } timeline: {
-    NextBusEntry(date: .now, busSchedules: [], selectedBusScheduleIndex: nil)
+    NextBusEntry(date: .now, busSchedules: kBusSchedules, selectedBusScheduleIndex: nil)
 }
+

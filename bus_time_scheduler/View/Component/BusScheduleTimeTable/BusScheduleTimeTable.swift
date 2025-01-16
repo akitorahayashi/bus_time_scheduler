@@ -40,7 +40,7 @@ class BusScheduleTimeTable: UIView, UITableViewDataSource, UITableViewDelegate {
     
     func scrollToNearestTime() {
         let currentDate = kDebugMode
-        // 今日の16時。年月日はその日に合わせる。
+        // デバック時は今日の16時。年月日はその日に合わせる。
         ? Calendar.current.date(bySettingHour: 16, minute: 0, second: 0, of: Date())!
         // 現在時刻
         : Date()
@@ -54,6 +54,7 @@ class BusScheduleTimeTable: UIView, UITableViewDataSource, UITableViewDelegate {
     
     // MARK: - UITableViewDataSource & UITableViewDelegate
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("numberOfSchedules: \(presenter.numberOfSchedules)")
         return presenter.numberOfSchedules
     }
     
@@ -62,7 +63,7 @@ class BusScheduleTimeTable: UIView, UITableViewDataSource, UITableViewDelegate {
         
         if let schedule = presenter.busSchedule(at: indexPath.row) {
             cell.configure(with: schedule)
-            // これがあることでチカチカ光る現象を防げる。別でハイライトの処理はある。
+            // 別でハイライトの処理はある。
             cell.selectionStyle = .none
             // tableViewを反転させた影響で、Cellも反転させることでUIを整える
             cell.transform = CGAffineTransform(scaleX: 1, y: -1)
