@@ -19,7 +19,7 @@ class BusSchedulePresenter {
             saveSelectedIndex()
         }
     }
-
+    
     init(busSchedules: [BusSchedule] = []) {
         self.busSchedules = busSchedules
         self.selectedBusScheduleIndex = nil
@@ -49,14 +49,6 @@ class BusSchedulePresenter {
         }
     }
     
-//    func clearCurrentSelection() {
-//        guard let currentSelectedIndex else {
-//            return
-//        }
-//        
-//        busSchedules[currentSelectedIndex].isSelected = false
-//    }
-//    
     var currentSelectedIndex: Int? {
         busSchedules.firstIndex {
             $0.isSelected
@@ -64,7 +56,13 @@ class BusSchedulePresenter {
     }
     
     func nearestScheduleIndex(currentTime: String) -> Int? {
-        return busSchedules.firstIndex(where: { $0.arrivalTime >= currentTime })
+        // 現在時刻以降の最初のバスを検索
+        if let nearestSchedule = busSchedules.firstIndex(where: { $0.arrivalTime >= currentTime }) {
+            return nearestSchedule
+        } else {
+            // 見つからなかった場合、一番早いバス（最初のスケジュール）を返す
+            return 0
+        }
     }
     
     // MARK: - UserDefaults
@@ -84,15 +82,16 @@ class BusSchedulePresenter {
     }
     
     private func loadData() {
-        let userDefaults = UserDefaults(suiteName: UserDefaultsManager.suitName)
-        if let userDefaults = userDefaults,
-           let savedSchedulesData = userDefaults.data(forKey: UserDefaultsManager.busSchedulesKey),
-           let savedSchedules = try? JSONDecoder().decode([BusSchedule].self, from: savedSchedulesData) {
-            busSchedules = savedSchedules
-        } else {
-            busSchedules = kBusSchedules
-        }
+//                let userDefaults = UserDefaults(suiteName: UserDefaultsManager.suitName)
+//                if let userDefaults = userDefaults,
+//                   let savedSchedulesData = userDefaults.data(forKey: UserDefaultsManager.busSchedulesKey),
+//                   let savedSchedules = try? JSONDecoder().decode([BusSchedule].self, from: savedSchedulesData) {
+//                    busSchedules = savedSchedules
+//                } else {
+        busSchedules = kBusSchedules
+//                }
         
-        selectedBusScheduleIndex = userDefaults?.integer(forKey: UserDefaultsManager.selectedIndexKey)
+        selectedBusScheduleIndex = nil
+//                userDefaults?.integer(forKey: UserDefaultsManager.selectedIndexKey)
     }
 }
