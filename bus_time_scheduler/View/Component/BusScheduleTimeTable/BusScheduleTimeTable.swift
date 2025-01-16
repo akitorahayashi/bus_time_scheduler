@@ -25,7 +25,6 @@ class BusScheduleTimeTable: UIView, UITableViewDataSource, UITableViewDelegate {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = 80
-        tableView.transform = CGAffineTransform(scaleX: 1, y: -1)
         tableView.register(BusScheduleCell.self, forCellReuseIdentifier: BusScheduleCell.identifier)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(tableView)
@@ -39,11 +38,7 @@ class BusScheduleTimeTable: UIView, UITableViewDataSource, UITableViewDelegate {
     }
     
     func scrollToNearestTime() {
-        let currentDate = kDebugMode
-        // デバック時は今日の16時。年月日はその日に合わせる。
-        ? Calendar.current.date(bySettingHour: 16, minute: 0, second: 0, of: Date())!
-        // 現在時刻
-        : Date()
+        let currentDate = DateManager.currentDate()
         let currentTimeString = DateFormatter.localizedString(from: currentDate, dateStyle: .none, timeStyle: .short)
         if let nearestIndex = presenter.nearestScheduleIndex(currentTime: currentTimeString) {
             DispatchQueue.main.async {
@@ -62,19 +57,19 @@ class BusScheduleTimeTable: UIView, UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: BusScheduleCell.identifier, for: indexPath) as! BusScheduleCell
         
         if let schedule = presenter.busSchedule(at: indexPath.row) {
-            cell.configure(with: schedule)
-            // 別でハイライトの処理はある。
+            // Check if this is the next bus
+            let isNextBus = presenter.nearestScheduleIndex(currentTime: DateFormatter.localizedString(from: DateManager.currentDate(), dateStyle: .none, timeStyle: .short)) == indexPath.row
+            cell.configure(with: schedule, isNextBus: isNextBus)
             cell.selectionStyle = .none
-            // tableViewを反転させた影響で、Cellも反転させることでUIを整える
-            cell.transform = CGAffineTransform(scaleX: 1, y: -1)
         } else {
             assertionFailure()
         }
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-                     
+        
         let currentSelectedIndex = presenter.currentSelectedIndex
         presenter.toggleSelection(at: indexPath.row)
         if let currentSelectedIndex {

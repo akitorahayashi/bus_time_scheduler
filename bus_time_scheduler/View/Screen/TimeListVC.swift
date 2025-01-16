@@ -51,7 +51,7 @@ class TimeListVC: UIViewController {
         view.addSubview(busScheduleTimeTable)
         busScheduleTimeTable.translatesAutoresizingMaskIntoConstraints = false
         
-        scrollToNextBusButton.setTitle("Show next bus on bottom", for: .normal)
+        scrollToNextBusButton.setTitle("Show next bus on top", for: .normal)
         scrollToNextBusButton.addTarget(self, action: #selector(scrollToNearestTimeButtonTapped), for: .touchUpInside)
         scrollToNextBusButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scrollToNextBusButton)

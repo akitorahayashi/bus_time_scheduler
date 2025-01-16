@@ -5,7 +5,7 @@
 //  Created by 林 明虎 on 2025/01/15.
 //
 
-struct BusSchedule: Codable {
+struct BusSchedule: Codable, Equatable {
     var isSelected: Bool
     let arrivalTime: String
     let delayedTime: String?

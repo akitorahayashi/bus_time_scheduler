@@ -28,6 +28,8 @@ struct NextBusProvider: TimelineProvider {
         let entry = NextBusEntry(date: currentDate, busSchedules: nextBusSchedules, selectedBusScheduleIndex: nil)
         entries.append(entry)
         
+        // 呼ばれたタイミングで次の出発時間を見つけて更新を予約する
+        
         // 15分後のエントリを追加
         let nextUpdateDate = Calendar.current.date(byAdding: .second, value: 1, to: currentDate)!
         let timeline = Timeline(entries: entries, policy: .after(nextUpdateDate))
@@ -37,7 +39,7 @@ struct NextBusProvider: TimelineProvider {
 
     // 現在時刻から近いバスの7本を取得する関数
     func getNextBusSchedules() -> [BusSchedule] {
-        let currentDate = Calendar.current.date(bySettingHour: 19, minute: 0, second: 0, of: Date())!
+        let currentDate = DateManager.currentDate()
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
         

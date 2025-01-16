@@ -60,6 +60,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		1B5FD5342D38AFB900163C62 /* Exceptions for "Util" folder in "NextBusWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				DateManager.swift,
+				UserdefaultsManager.swift,
+			);
+			target = 1BD3AF552D37AB020040DCD6 /* NextBusWidgetExtension */;
+		};
 		1BD3AF212D3776D00040DCD6 /* Exceptions for "bus_time_scheduler" folder in "bus_time_scheduler" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -78,13 +86,13 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				BusSchedule.swift,
-				UserdefaultsManager.swift,
 			);
 			target = 1BD3AF552D37AB020040DCD6 /* NextBusWidgetExtension */;
 		};
 		1BD3AF852D37ABF70040DCD6 /* Exceptions for "Constant" folder in "NextBusWidgetExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				kDebugMode.swift,
 				kNextBusWidget.swift,
 			);
 			target = 1BD3AF552D37AB020040DCD6 /* NextBusWidgetExtension */;
@@ -92,6 +100,14 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		1B5FD5332D38AFB300163C62 /* Util */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				1B5FD5342D38AFB900163C62 /* Exceptions for "Util" folder in "NextBusWidgetExtension" target */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
 		1BD3AEFB2D3776CE0040DCD6 /* bus_time_scheduler */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -173,6 +189,7 @@
 		1BD3AEF02D3776CE0040DCD6 = {
 			isa = PBXGroup;
 			children = (
+				1B5FD5332D38AFB300163C62 /* Util */,
 				1BD3AF822D37ABF70040DCD6 /* Constant */,
 				1BD3AF7C2D37ABF40040DCD6 /* Model */,
 				1BD3AEFB2D3776CE0040DCD6 /* bus_time_scheduler */,
@@ -222,6 +239,7 @@
 				1BD3AF652D37AB050040DCD6 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
+				1B5FD5332D38AFB300163C62 /* Util */,
 				1BD3AEFB2D3776CE0040DCD6 /* bus_time_scheduler */,
 				1BD3AF7C2D37ABF40040DCD6 /* Model */,
 				1BD3AF822D37ABF70040DCD6 /* Constant */,

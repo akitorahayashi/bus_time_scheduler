@@ -12,6 +12,7 @@ class BusScheduleCell: UITableViewCell {
     
     private let dateLabel = UILabel()
     private let titleLabel = UILabel()
+    private let nextLabel = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -24,9 +25,15 @@ class BusScheduleCell: UITableViewCell {
         titleLabel.textAlignment = .center
         titleLabel.textColor = .gray.withAlphaComponent(0.9)
         
-        let labelStackView = UIStackView(arrangedSubviews: [dateLabel, titleLabel])
+        nextLabel.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+        nextLabel.textAlignment = .center
+        nextLabel.textColor = .red
+        nextLabel.text = "NEXT"
+        nextLabel.isHidden = true
+        
+        let labelStackView = UIStackView(arrangedSubviews: [dateLabel, titleLabel, nextLabel])
         labelStackView.axis = .vertical
-        labelStackView.spacing = 4 // You can adjust the spacing as needed
+        labelStackView.spacing = 4
         labelStackView.alignment = .center
         labelStackView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(labelStackView)
@@ -38,9 +45,9 @@ class BusScheduleCell: UITableViewCell {
             contentView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
             
             labelStackView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            labelStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor), // Ensure it's centered vertically
-            labelStackView.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: -40), // Optional padding for width
-            labelStackView.heightAnchor.constraint(lessThanOrEqualTo: contentView.heightAnchor, constant: -20) // Keep the height within bounds
+            labelStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            labelStackView.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: -40),
+            labelStackView.heightAnchor.constraint(lessThanOrEqualTo: contentView.heightAnchor, constant: -20)
         ])
     }
     
@@ -48,14 +55,14 @@ class BusScheduleCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(with schedule: BusSchedule) {
+    func configure(with schedule: BusSchedule, isNextBus: Bool) {
+        
         titleLabel.text = schedule.arrivalTime
         
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "HH:mm"
         
         guard let arrivalTime = timeFormatter.date(from: schedule.arrivalTime) else {
-            print("エラー: arrivalTimeが不正な形式です。提供された値: \(schedule.arrivalTime)")
             return
         }
         
@@ -66,7 +73,6 @@ class BusScheduleCell: UITableViewCell {
                                               minute: calendar.component(.minute, from: arrivalTime),
                                               second: 0,
                                               of: currentDate) else {
-            print("エラー: arrivalDateの設定に失敗しました。currentDate: \(currentDate), arrivalTime: \(schedule.arrivalTime)")
             return
         }
         
@@ -74,7 +80,6 @@ class BusScheduleCell: UITableViewCell {
         
         if arrivalDate < currentDate {
             guard let nextDay = calendar.date(byAdding: .day, value: 1, to: currentDate) else {
-                print("エラー: 翌日の日付計算に失敗しました。currentDate: \(currentDate)")
                 return
             }
             timeFormatter.dateFormat = "yyyy/MM/dd"
@@ -85,6 +90,13 @@ class BusScheduleCell: UITableViewCell {
         }
         
         dateLabel.text = displayDate
+        
+        // 次のバスのスケジュールならNEXTのラベルを表示する
+        if isNextBus {
+            nextLabel.isHidden = false
+        } else {
+            nextLabel.isHidden = true
+        }
         
         let animator = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 1)
         animator.addAnimations {
