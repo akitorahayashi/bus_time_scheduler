@@ -7,7 +7,7 @@
 
 import Foundation
 
-class DateManager {
+final class DateManager {
     
     // 現在の時刻か、デバッグ用の指定時刻（16:00）を返す
     static func currentDate() -> Date {
@@ -18,3 +18,4 @@ class DateManager {
         }
     }
 }
+

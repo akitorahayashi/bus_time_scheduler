@@ -7,7 +7,7 @@
 
 import Foundation
 
-class BusSchedulePresenter {
+final class BusSchedulePresenter {
     private(set) var busSchedules: [BusSchedule] {
         didSet {
             saveBusSchedules()

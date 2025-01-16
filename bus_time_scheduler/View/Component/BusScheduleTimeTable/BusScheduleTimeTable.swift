@@ -77,4 +77,11 @@ class BusScheduleTimeTable: UIView, UITableViewDataSource, UITableViewDelegate {
         }
         tableView.reloadRows(at: [indexPath], with: .automatic)
     }
+    // MARK: - Reload Data Method
+    func reloadData() {
+        // テーブルビューをリロード
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.reloadData()
+        }
+    }
 }

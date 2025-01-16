@@ -7,6 +7,7 @@
 
 struct BusSchedule: Codable, Equatable {
     var isSelected: Bool
+    // FIXME: use `Date
     let arrivalTime: String
     let delayedTime: String?
     
