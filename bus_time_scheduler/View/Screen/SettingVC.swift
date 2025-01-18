@@ -37,6 +37,7 @@ class SettingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource 
         label.font = UIFont.systemFont(ofSize: 16)
         
         // トグルスイッチの位置とアクションを設定
+        toggleSwitch.onTintColor = .accent
         toggleSwitch.addTarget(self, action: #selector(toggleSwitchChanged), for: .valueChanged)
         
         // ピッカービューの設定
