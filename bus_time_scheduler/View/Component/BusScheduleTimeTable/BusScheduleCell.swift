@@ -55,53 +55,41 @@ final class BusScheduleCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(with schedule: BusSchedule, isNextBus: Bool) {
+    func configure(with busSchedule: BusSchedule, currentDate: Date, isNextBus: Bool) {
+        let arrivalTime = busSchedule.arrivalTime
+        titleLabel.text = arrivalTime.formatted()
         
-        titleLabel.text = schedule.arrivalTime
-        
-        let timeFormatter = DateFormatter()
-        timeFormatter.dateFormat = "HH:mm"
-        
-        guard let arrivalTime = timeFormatter.date(from: schedule.arrivalTime) else {
-            return
-        }
-        
-        let currentDate = Date()
-        let calendar = Calendar.current
-        
-        guard let arrivalDate = calendar.date(bySettingHour: calendar.component(.hour, from: arrivalTime),
-                                              minute: calendar.component(.minute, from: arrivalTime),
-                                              second: 0,
-                                              of: currentDate) else {
-            return
-        }
-        
-        let displayDate: String
-        
-        if arrivalDate < currentDate {
-            guard let nextDay = calendar.date(byAdding: .day, value: 1, to: currentDate) else {
-                return
-            }
-            timeFormatter.dateFormat = "yyyy/MM/dd"
-            displayDate = timeFormatter.string(from: nextDay)
-        } else {
-            timeFormatter.dateFormat = "yyyy/MM/dd"
-            displayDate = timeFormatter.string(from: currentDate)
-        }
-        
+        // 到着年月日を取得
+        let displayDate = calculateDisplayDate(for: arrivalTime, currentDate: currentDate)
         dateLabel.text = displayDate
         
         // 次のバスのスケジュールならNEXTのラベルを表示する
-        if isNextBus {
-            nextLabel.isHidden = false
-        } else {
-            nextLabel.isHidden = true
-        }
+        nextLabel.isHidden = !isNextBus
         
         let animator = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 1)
         animator.addAnimations {
-            self.contentView.backgroundColor = schedule.isSelected ? UIColor.accent.withAlphaComponent(0.2) : .clear
+            self.contentView.backgroundColor = busSchedule.isSelected ? UIColor.accent.withAlphaComponent(0.2) : .clear
         }
         animator.startAnimation()
     }
+
+    private func calculateDisplayDate(for arrivalTime: BSFixedTime, currentDate: Date) -> String {
+        let calendar = Calendar.current
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd"
+        
+        let currentTime = BSFixedTime(from: currentDate)
+        
+        // 到着時間が現在の時刻より前の場合、翌日を返す
+        if arrivalTime < currentTime {
+            guard let nextDay = calendar.date(byAdding: .day, value: 1, to: currentDate) else {
+                return ""
+            }
+            return formatter.string(from: nextDay)
+        }
+        
+        // 現在の日付を返す
+        return formatter.string(from: currentDate)
+    }
+
 }
