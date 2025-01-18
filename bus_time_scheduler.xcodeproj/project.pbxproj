@@ -51,7 +51,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1B4A5BCD2D3B662E00CA54A2 /* NextBusWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NextBusWidgetExtension.entitlements; sourceTree = "<group>"; };
 		1B4A5BDD2D3B676C00CA54A2 /* BusSchedulesWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BusSchedulesWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B4A5C092D3B6C2A00CA54A2 /* BusSchedulesWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BusSchedulesWidgetExtension.entitlements; sourceTree = "<group>"; };
 		1BD3AEF92D3776CE0040DCD6 /* bus_time_scheduler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bus_time_scheduler.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -190,7 +189,6 @@
 			isa = PBXGroup;
 			children = (
 				1B4A5C092D3B6C2A00CA54A2 /* BusSchedulesWidgetExtension.entitlements */,
-				1B4A5BCD2D3B662E00CA54A2 /* NextBusWidgetExtension.entitlements */,
 				1B5FD5332D38AFB300163C62 /* Util */,
 				1BD3AF822D37ABF70040DCD6 /* Constant */,
 				1BD3AF7C2D37ABF40040DCD6 /* Model */,
