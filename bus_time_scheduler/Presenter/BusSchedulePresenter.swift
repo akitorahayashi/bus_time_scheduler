@@ -8,22 +8,13 @@
 import Foundation
 
 final class BusSchedulePresenter {
-    private(set) var busSchedules: [BusSchedule] {
-        didSet {
-            saveBusSchedules()
-        }
-    }
+    private(set) var busSchedules: [BusSchedule]
     
-    private(set) var selectedBusScheduleIndex: Int? {
-        didSet {
-            saveSelectedIndex()
-        }
-    }
+    private(set) var selectedBusScheduleIndex: Int?
     
     init(busSchedules: [BusSchedule] = []) {
         self.busSchedules = busSchedules
         self.selectedBusScheduleIndex = nil
-        loadData()
     }
     
     var numberOfSchedules: Int {
