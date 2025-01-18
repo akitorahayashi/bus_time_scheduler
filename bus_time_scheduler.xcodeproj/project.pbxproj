@@ -92,8 +92,7 @@
 		1BD3AF852D37ABF70040DCD6 /* Exceptions for "Constant" folder in "NextBusWidgetExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				kDebugMode.swift,
-				kNextBusWidget.swift,
+				Constant.swift,
 			);
 			target = 1BD3AF552D37AB020040DCD6 /* NextBusWidgetExtension */;
 		};

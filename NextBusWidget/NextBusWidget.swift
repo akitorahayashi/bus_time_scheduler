@@ -33,7 +33,7 @@ struct NextBusWidget: Widget {
 #Preview(as: .systemSmall) {
     NextBusWidget()
 } timeline: {
-    NextBusEntry(date: .now, busSchedules: kBusSchedules, selectedBusScheduleIndex: nil)
+    NextBusEntry(date: .now, busSchedules: Constant.busSchedules, selectedBusScheduleIndex: nil)
 }
 
 

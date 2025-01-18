@@ -67,17 +67,17 @@ final class BusSchedulePresenter {
     
     // MARK: - UserDefaults
     private func saveBusSchedules() {
-        let userDefaults = UserDefaults(suiteName: UserDefaultsManager.suitName)
+        let userDefaults = UserDefaults(suiteName: UserDefaultsKeys.suitName.rawValue)
         if let userDefaults = userDefaults {
             let encodedSchedules = try? JSONEncoder().encode(busSchedules)
-            userDefaults.set(encodedSchedules, forKey: UserDefaultsManager.busSchedulesKey)
+            userDefaults.set(encodedSchedules, forKey: UserDefaultsKeys.busSchedulesKey.rawValue)
         }
     }
     
     private func saveSelectedIndex() {
-        let userDefaults = UserDefaults(suiteName: UserDefaultsManager.suitName)
+        let userDefaults = UserDefaults(suiteName: UserDefaultsKeys.suitName.rawValue)
         if let userDefaults = userDefaults {
-            userDefaults.set(selectedBusScheduleIndex, forKey: UserDefaultsManager.selectedIndexKey)
+            userDefaults.set(selectedBusScheduleIndex, forKey: UserDefaultsKeys.selectedIndexKey.rawValue)
         }
     }
     
@@ -88,7 +88,7 @@ final class BusSchedulePresenter {
 //                   let savedSchedules = try? JSONDecoder().decode([BusSchedule].self, from: savedSchedulesData) {
 //                    busSchedules = savedSchedules
 //                } else {
-        busSchedules = kBusSchedules
+        busSchedules = Constant.busSchedules
 //                }
         
         selectedBusScheduleIndex = nil
