@@ -14,7 +14,7 @@ class BusSchedulePresenterTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        presenter = BusSchedulePresenter(busSchedules: kBusSchedules)
+        presenter = BusSchedulePresenter(busSchedules: Constant.busSchedules)
     }
 
     override func tearDown() {
@@ -47,7 +47,7 @@ class BusSchedulePresenterTests: XCTestCase {
     func testToggleSelection_atInvalidIndex() {
         // 不正なインデックスを指定した場合
         presenter.toggleSelection(at: -1)
-        presenter.toggleSelection(at: kBusSchedules.count)
+        presenter.toggleSelection(at: Constant.busSchedules.count)
         XCTAssertNil(presenter.currentSelectedIndex)
     }
     

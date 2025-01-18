@@ -23,7 +23,7 @@ class CardButton: UIButton {
     
     private func setupButton() {
         self.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-        self.backgroundColor = .white
+        self.backgroundColor = .systemBackground
         self.setTitleColor(.accent, for: .normal)
         self.layer.borderWidth = 2
         self.layer.borderColor = UIColor.accent.cgColor
