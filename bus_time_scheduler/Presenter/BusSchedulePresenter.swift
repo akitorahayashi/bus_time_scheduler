@@ -55,43 +55,13 @@ final class BusSchedulePresenter {
         }
     }
     
-    func nearestScheduleIndex(currentTime: String) -> Int? {
+    func nearestScheduleIndex(busSchedules: [BusSchedule], currentTime: Date) -> Int? {
         // 現在時刻以降の最初のバスを検索
-        if let nearestSchedule = busSchedules.firstIndex(where: { $0.arrivalTime >= currentTime }) {
+        if let nearestSchedule = busSchedules.firstIndex(where: { $0.arrivalTime >= BSFixedTime(from: currentTime) }) {
             return nearestSchedule
         } else {
             // 見つからなかった場合、一番早いバス（最初のスケジュール）を返す
             return 0
         }
-    }
-    
-    // MARK: - UserDefaults
-    private func saveBusSchedules() {
-        let userDefaults = UserDefaults(suiteName: UserDefaultsKeys.suitName.rawValue)
-        if let userDefaults = userDefaults {
-            let encodedSchedules = try? JSONEncoder().encode(busSchedules)
-            userDefaults.set(encodedSchedules, forKey: UserDefaultsKeys.busSchedulesKey.rawValue)
-        }
-    }
-    
-    private func saveSelectedIndex() {
-        let userDefaults = UserDefaults(suiteName: UserDefaultsKeys.suitName.rawValue)
-        if let userDefaults = userDefaults {
-            userDefaults.set(selectedBusScheduleIndex, forKey: UserDefaultsKeys.selectedIndexKey.rawValue)
-        }
-    }
-    
-    private func loadData() {
-//                let userDefaults = UserDefaults(suiteName: UserDefaultsManager.suitName)
-//                if let userDefaults = userDefaults,
-//                   let savedSchedulesData = userDefaults.data(forKey: UserDefaultsManager.busSchedulesKey),
-//                   let savedSchedules = try? JSONDecoder().decode([BusSchedule].self, from: savedSchedulesData) {
-//                    busSchedules = savedSchedules
-//                } else {
-        busSchedules = Constant.busSchedules
-//                }
-        
-        selectedBusScheduleIndex = nil
-//                userDefaults?.integer(forKey: UserDefaultsManager.selectedIndexKey)
     }
 }
