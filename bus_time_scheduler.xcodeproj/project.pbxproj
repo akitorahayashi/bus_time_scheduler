@@ -71,6 +71,7 @@
 		1B4A5BF82D3B68EA00CA54A2 /* Exceptions for "Model" folder in "BusSchedulesWidgetExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				BSFixedTime.swift,
 				BusSchedule.swift,
 			);
 			target = 1B4A5BDC2D3B676C00CA54A2 /* BusSchedulesWidgetExtension */;
