@@ -10,7 +10,7 @@
 
 import UIKit
 
-class TimeListVC: UIViewController {
+final class TimeListVC: UIViewController {
     private let presenter = BusSchedulePresenter()
     private var busScheduleTimeTable: BusScheduleTimeTable
     private let scrollToNextBusButton = CardButton()

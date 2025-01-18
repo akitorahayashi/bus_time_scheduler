@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PrepareTimePicker: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
+final class PrepareTimePicker: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
     // MARK: - Properties
     private let pickerView = UIPickerView()
     private let pickerData: [(text: String, value: Int)] = (0...12).map { index in

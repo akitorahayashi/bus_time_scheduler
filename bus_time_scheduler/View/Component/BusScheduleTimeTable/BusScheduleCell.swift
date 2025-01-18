@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BusScheduleCell: UITableViewCell {
+final class BusScheduleCell: UITableViewCell {
     static let identifier = "BusScheduleCell"
     
     private let dateLabel = UILabel()
