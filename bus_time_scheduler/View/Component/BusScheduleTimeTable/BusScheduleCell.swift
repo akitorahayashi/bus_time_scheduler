@@ -60,7 +60,7 @@ final class BusScheduleCell: UITableViewCell {
         titleLabel.text = arrivalTime.formatted()
         
         // 到着年月日を取得
-        let displayDate = calculateDisplayDate(for: arrivalTime, currentDate: DateManager.currentDate())
+        let displayDate = calculateDisplayDate(for: arrivalTime, currentDate: BSDateUtilities.currentDate())
         dateLabel.text = displayDate
         
         // 次のバスのスケジュールならNEXTのラベルを表示する

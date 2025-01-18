@@ -38,7 +38,7 @@ final class BusScheduleTimeTable: UIView, UITableViewDataSource, UITableViewDele
     }
     
     func scrollToNearestTime() {
-        if let nearestIndex = presenter.nearestScheduleIndex(busSchedules: BusSchedulesConstants.busSchedules, currentTime: DateManager.currentDate()) {
+        if let nearestIndex = presenter.nearestScheduleIndex(busSchedules: BusSchedulesConstants.busSchedules, currentTime: BSDateUtilities.currentDate()) {
             DispatchQueue.main.async {
                 self.tableView.scrollToRow(at: IndexPath(row: nearestIndex, section: 0), at: .top, animated: true)
             }
@@ -56,7 +56,7 @@ final class BusScheduleTimeTable: UIView, UITableViewDataSource, UITableViewDele
         
         if let schedule = presenter.busSchedule(at: indexPath.row) {
             // Check if this is the next bus
-            let isNextBus: Bool = presenter.nearestScheduleIndex(busSchedules: BusSchedulesConstants.busSchedules, currentTime: DateManager.currentDate()) == indexPath.row
+            let isNextBus: Bool = presenter.nearestScheduleIndex(busSchedules: BusSchedulesConstants.busSchedules, currentTime: BSDateUtilities.currentDate()) == indexPath.row
             cell.configure(with: schedule, isNextBus: isNextBus)
             cell.selectionStyle = .none
         } else {

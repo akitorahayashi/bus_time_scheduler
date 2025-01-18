@@ -14,7 +14,7 @@ struct BusSchedulesTimeLineProvider: TimelineProvider {
     }
     
     func getSnapshot(in context: Context, completion: @escaping (BusSchedulesEntry) -> ()) {
-        let entry = BusSchedulesEntry(date: Date(), busSchedules: getNextBusSchedules(currentDate: DateManager.currentDate(), busSchedules: BusSchedulesConstants.busSchedules))
+        let entry = BusSchedulesEntry(date: Date(), busSchedules: getNextBusSchedules(currentDate: BSDateUtilities.currentDate(), busSchedules: BusSchedulesConstants.busSchedules))
         completion(entry)
     }
     
@@ -22,7 +22,7 @@ struct BusSchedulesTimeLineProvider: TimelineProvider {
         
         var entries: [BusSchedulesEntry] = []
                         
-        let nextBusSchedules = getNextBusSchedules(currentDate: DateManager.currentDate(), busSchedules: BusSchedulesConstants.busSchedules)
+        let nextBusSchedules = getNextBusSchedules(currentDate: BSDateUtilities.currentDate(), busSchedules: BusSchedulesConstants.busSchedules)
         
         var previousEntry: BusSchedulesEntry?
         

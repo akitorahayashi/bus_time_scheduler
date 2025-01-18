@@ -104,7 +104,7 @@
 		1B4A5BFA2D3B68F800CA54A2 /* Exceptions for "Util" folder in "BusSchedulesWidgetExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				DateManager.swift,
+				BSDateUtilities.swift,
 				UserDefaultsKeys.swift,
 			);
 			target = 1B4A5BDC2D3B676C00CA54A2 /* BusSchedulesWidgetExtension */;
