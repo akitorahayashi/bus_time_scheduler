@@ -14,7 +14,7 @@ struct BusSchedulesTimeLineProvider: TimelineProvider {
     }
     
     func getSnapshot(in context: Context, completion: @escaping (BusSchedulesEntry) -> ()) {
-        let entry = BusSchedulesEntry(date: Date(), busSchedules: getNextBusSchedules(), selectedBusScheduleIndex: nil)
+        let entry = BusSchedulesEntry(date: Date(), busSchedules: getNextBusSchedules(currentDate: DateManager.currentDate(), busSchedules: BusSchedulesConstants.busSchedules), selectedBusScheduleIndex: nil)
         completion(entry)
     }
     
@@ -22,7 +22,7 @@ struct BusSchedulesTimeLineProvider: TimelineProvider {
         
         var entries: [BusSchedulesEntry] = []
                         
-        let nextBusSchedules = getNextBusSchedules()
+        let nextBusSchedules = getNextBusSchedules(currentDate: DateManager.currentDate(), busSchedules: BusSchedulesConstants.busSchedules)
         
         var previousEntry: BusSchedulesEntry?
         
@@ -54,20 +54,20 @@ struct BusSchedulesTimeLineProvider: TimelineProvider {
     }
     
     // 現在時刻から近いバスの7本を取得する関数
-    func getNextBusSchedules() -> [BusSchedule] {
-        let currentDate = DateManager.currentDate()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm"
-        
-        // 時刻をDate型に変換
-        let currentTimeString = formatter.string(from: currentDate)
+    func getNextBusSchedules(
+        currentDate: Date,
+        busSchedules: [BusSchedule]
+    ) -> [BusSchedule] {
+        // 現在時刻を BSFixedTime に変換
+        let currentFixedTime = BSFixedTime(from: currentDate)
         
         // 現在時刻以降のバスのスケジュールをフィルタリング
-        let upcomingSchedules = BusSchedulesConstants.busSchedules.filter { busSchedule in
-            return busSchedule.arrivalTime >= currentTimeString
+        let upcomingSchedules = busSchedules.filter { busSchedule in
+            busSchedule.arrivalTime >= currentFixedTime
         }
         
         // 最初の8本を返す
         return Array(upcomingSchedules.prefix(8))
     }
+
 }
