@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct BusSchedulesWidgetEntryView : View {
+struct BusSchedulesWidgetEntryView: View {
     var entry: BusSchedulesEntry
     @Environment(\.widgetFamily) var widgetFamily
     
@@ -35,16 +35,27 @@ struct BusSchedulesWidgetEntryView : View {
             let totalRows = widgetFamily == .systemLarge ? 7 : 2
 
             VStack(alignment: .leading, spacing: 10) {
-                // 足りない行数を空の行で埋める
+                // スケジュール行を表示
                 ForEach(busSchedulesToShow, id: \.arrivalTime) { busSchedule in
                     UpcomingBusScheduleRow(busSchedule: busSchedule, allSchedules: entry.busSchedules)
                 }
                 
                 // 足りない行を空白で埋める
-                ForEach(0..<totalRows - busSchedulesToShow.count, id: \.self) { _ in
-                    UpcomingBusScheduleRow(busSchedule: BusSchedule(arrivalTime: ""), allSchedules: entry.busSchedules) // ダミーデータ
-                        .opacity(0) // 見えなくする
-                }
+                fillEmptyRows(totalRows: totalRows, currentCount: busSchedulesToShow.count)
+            }
+        }
+    }
+    
+    /// 足りない行を埋めるためのビュー
+    @ViewBuilder
+    private func fillEmptyRows(totalRows: Int, currentCount: Int) -> some View {
+        if totalRows > currentCount {
+            ForEach(0..<(totalRows - currentCount), id: \.self) { _ in
+                UpcomingBusScheduleRow(
+                    busSchedule: BusSchedule(arrivalTime: try! BSFixedTime(hour: 0, minute: 0)), // 空行用のダミー
+                    allSchedules: entry.busSchedules
+                )
+                .opacity(0) // 見えなくする
             }
         }
     }

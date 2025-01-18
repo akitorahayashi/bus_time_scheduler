@@ -12,11 +12,14 @@ struct UpcomingBusScheduleRow: View {
     var busSchedule: BusSchedule
     var allSchedules: [BusSchedule]
     
+    private var indexInAllSchedules: Int? {
+        allSchedules.firstIndex(where: { $0.arrivalTime == busSchedule.arrivalTime })
+    }
+    
     var body: some View {
-        let corrIdx: Int? = allSchedules.firstIndex(where: { $0.arrivalTime == busSchedule.arrivalTime })
         HStack {
             // 到着順を明示
-            if let index = corrIdx {
+            if let index = indexInAllSchedules {
                 Text("\(index + 1).")
                     .font(.system(size: 14))
                     .fontWeight(.bold)
