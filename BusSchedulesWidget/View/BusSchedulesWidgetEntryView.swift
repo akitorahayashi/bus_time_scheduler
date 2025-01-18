@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct BusSchedulesWidgetEntryView: View {
     var entry: BusSchedulesEntry

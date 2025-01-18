@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BSFixedTime: Hashable, Comparable {
+struct BSFixedTime: Codable, Hashable, Comparable {
     let hour: Int
     let minute: Int
     

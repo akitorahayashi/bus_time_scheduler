@@ -41,6 +41,17 @@
                ReferencedContainer = "container:bus_time_scheduler.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "1B8B90482D3BD1520045C96C"
+               BuildableName = "BusSchedulesWidgetTests.xctest"
+               BlueprintName = "BusSchedulesWidgetTests"
+               ReferencedContainer = "container:bus_time_scheduler.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

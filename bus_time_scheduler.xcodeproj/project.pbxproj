@@ -20,6 +20,13 @@
 			remoteGlobalIDString = 1B4A5BDC2D3B676C00CA54A2;
 			remoteInfo = BusSchedulesWidgetExtension;
 		};
+		1B8B90812D3BD77D0045C96C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1BD3AEF12D3776CE0040DCD6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1B4A5BDC2D3B676C00CA54A2;
+			remoteInfo = BusSchedulesWidgetExtension;
+		};
 		1BD3AF102D3776D00040DCD6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1BD3AEF12D3776CE0040DCD6 /* Project object */;
@@ -53,6 +60,24 @@
 /* Begin PBXFileReference section */
 		1B4A5BDD2D3B676C00CA54A2 /* BusSchedulesWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BusSchedulesWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B4A5C092D3B6C2A00CA54A2 /* BusSchedulesWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BusSchedulesWidgetExtension.entitlements; sourceTree = "<group>"; };
+		1B8B90852D3BD9B30045C96C /* BusSchedulesEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusSchedulesEntry.swift; sourceTree = "<group>"; };
+		1B8B90872D3BD9B30045C96C /* BusSchedulesTimeLineProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusSchedulesTimeLineProvider.swift; sourceTree = "<group>"; };
+		1B8B90892D3BD9B30045C96C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1B8B908B2D3BD9B30045C96C /* FirstBusScheduleRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstBusScheduleRow.swift; sourceTree = "<group>"; };
+		1B8B908C2D3BD9B30045C96C /* UpcomingBusScheduleRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingBusScheduleRow.swift; sourceTree = "<group>"; };
+		1B8B908E2D3BD9B30045C96C /* BusSchedulesWidgetEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusSchedulesWidgetEntryView.swift; sourceTree = "<group>"; };
+		1B8B90902D3BD9B30045C96C /* BusSchedulesWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusSchedulesWidget.swift; sourceTree = "<group>"; };
+		1B8B90912D3BD9B30045C96C /* BusSchedulesWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusSchedulesWidgetBundle.swift; sourceTree = "<group>"; };
+		1B8B90922D3BD9B30045C96C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1B8B90942D3BD9D30045C96C /* BusSchedulesEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusSchedulesEntry.swift; sourceTree = "<group>"; };
+		1B8B90962D3BD9D30045C96C /* BusSchedulesTimeLineProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusSchedulesTimeLineProvider.swift; sourceTree = "<group>"; };
+		1B8B90982D3BD9D30045C96C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1B8B909A2D3BD9D30045C96C /* FirstBusScheduleRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstBusScheduleRow.swift; sourceTree = "<group>"; };
+		1B8B909B2D3BD9D30045C96C /* UpcomingBusScheduleRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingBusScheduleRow.swift; sourceTree = "<group>"; };
+		1B8B909D2D3BD9D30045C96C /* BusSchedulesWidgetEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusSchedulesWidgetEntryView.swift; sourceTree = "<group>"; };
+		1B8B909F2D3BD9D30045C96C /* BusSchedulesWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusSchedulesWidget.swift; sourceTree = "<group>"; };
+		1B8B90A02D3BD9D30045C96C /* BusSchedulesWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusSchedulesWidgetBundle.swift; sourceTree = "<group>"; };
+		1B8B90A12D3BD9D30045C96C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1BD3AEF92D3776CE0040DCD6 /* bus_time_scheduler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bus_time_scheduler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BD3AF0F2D3776D00040DCD6 /* bus_time_schedulerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = bus_time_schedulerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BD3AF192D3776D00040DCD6 /* bus_time_schedulerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = bus_time_schedulerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,6 +105,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				DateManager.swift,
+				UserDefaultsKeys.swift,
 			);
 			target = 1B4A5BDC2D3B676C00CA54A2 /* BusSchedulesWidgetExtension */;
 		};
@@ -187,6 +213,118 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B8B90862D3BD9B30045C96C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1B8B90852D3BD9B30045C96C /* BusSchedulesEntry.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1B8B90882D3BD9B30045C96C /* Provider */ = {
+			isa = PBXGroup;
+			children = (
+				1B8B90872D3BD9B30045C96C /* BusSchedulesTimeLineProvider.swift */,
+			);
+			path = Provider;
+			sourceTree = "<group>";
+		};
+		1B8B908A2D3BD9B30045C96C /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				1B8B90892D3BD9B30045C96C /* Assets.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		1B8B908D2D3BD9B30045C96C /* BusScheduleRow */ = {
+			isa = PBXGroup;
+			children = (
+				1B8B908B2D3BD9B30045C96C /* FirstBusScheduleRow.swift */,
+				1B8B908C2D3BD9B30045C96C /* UpcomingBusScheduleRow.swift */,
+			);
+			path = BusScheduleRow;
+			sourceTree = "<group>";
+		};
+		1B8B908F2D3BD9B30045C96C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1B8B908D2D3BD9B30045C96C /* BusScheduleRow */,
+				1B8B908E2D3BD9B30045C96C /* BusSchedulesWidgetEntryView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1B8B90932D3BD9B30045C96C /* BusSchedulesWidget */ = {
+			isa = PBXGroup;
+			children = (
+				1B8B90862D3BD9B30045C96C /* Model */,
+				1B8B90882D3BD9B30045C96C /* Provider */,
+				1B8B908A2D3BD9B30045C96C /* Resource */,
+				1B8B908F2D3BD9B30045C96C /* View */,
+				1B8B90902D3BD9B30045C96C /* BusSchedulesWidget.swift */,
+				1B8B90912D3BD9B30045C96C /* BusSchedulesWidgetBundle.swift */,
+				1B8B90922D3BD9B30045C96C /* Info.plist */,
+			);
+			path = BusSchedulesWidget;
+			sourceTree = "<group>";
+		};
+		1B8B90952D3BD9D30045C96C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1B8B90942D3BD9D30045C96C /* BusSchedulesEntry.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1B8B90972D3BD9D30045C96C /* Provider */ = {
+			isa = PBXGroup;
+			children = (
+				1B8B90962D3BD9D30045C96C /* BusSchedulesTimeLineProvider.swift */,
+			);
+			path = Provider;
+			sourceTree = "<group>";
+		};
+		1B8B90992D3BD9D30045C96C /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				1B8B90982D3BD9D30045C96C /* Assets.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		1B8B909C2D3BD9D30045C96C /* BusScheduleRow */ = {
+			isa = PBXGroup;
+			children = (
+				1B8B909A2D3BD9D30045C96C /* FirstBusScheduleRow.swift */,
+				1B8B909B2D3BD9D30045C96C /* UpcomingBusScheduleRow.swift */,
+			);
+			path = BusScheduleRow;
+			sourceTree = "<group>";
+		};
+		1B8B909E2D3BD9D30045C96C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1B8B909C2D3BD9D30045C96C /* BusScheduleRow */,
+				1B8B909D2D3BD9D30045C96C /* BusSchedulesWidgetEntryView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1B8B90A22D3BD9D30045C96C /* BusSchedulesWidget */ = {
+			isa = PBXGroup;
+			children = (
+				1B8B90952D3BD9D30045C96C /* Model */,
+				1B8B90972D3BD9D30045C96C /* Provider */,
+				1B8B90992D3BD9D30045C96C /* Resource */,
+				1B8B909E2D3BD9D30045C96C /* View */,
+				1B8B909F2D3BD9D30045C96C /* BusSchedulesWidget.swift */,
+				1B8B90A02D3BD9D30045C96C /* BusSchedulesWidgetBundle.swift */,
+				1B8B90A12D3BD9D30045C96C /* Info.plist */,
+			);
+			path = BusSchedulesWidget;
+			sourceTree = "<group>";
+		};
 		1BD3AEF02D3776CE0040DCD6 = {
 			isa = PBXGroup;
 			children = (
@@ -217,6 +355,8 @@
 		1BD3AF572D37AB020040DCD6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1B8B90932D3BD9B30045C96C /* BusSchedulesWidget */,
+				1B8B90A22D3BD9D30045C96C /* BusSchedulesWidget */,
 				1BD3AF582D37AB020040DCD6 /* WidgetKit.framework */,
 				1BD3AF5A2D37AB020040DCD6 /* SwiftUI.framework */,
 			);
@@ -286,6 +426,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				1B8B90822D3BD77D0045C96C /* PBXTargetDependency */,
 				1BD3AF112D3776D00040DCD6 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
@@ -436,6 +577,11 @@
 			isa = PBXTargetDependency;
 			target = 1B4A5BDC2D3B676C00CA54A2 /* BusSchedulesWidgetExtension */;
 			targetProxy = 1B4A5BE82D3B676F00CA54A2 /* PBXContainerItemProxy */;
+		};
+		1B8B90822D3BD77D0045C96C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1B4A5BDC2D3B676C00CA54A2 /* BusSchedulesWidgetExtension */;
+			targetProxy = 1B8B90812D3BD77D0045C96C /* PBXContainerItemProxy */;
 		};
 		1BD3AF112D3776D00040DCD6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

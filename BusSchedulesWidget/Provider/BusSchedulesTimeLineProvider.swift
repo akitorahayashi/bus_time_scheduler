@@ -10,11 +10,11 @@ import SwiftUI
 
 struct BusSchedulesTimeLineProvider: TimelineProvider {
     func placeholder(in context: Context) -> BusSchedulesEntry {
-        return BusSchedulesEntry(date: Date(), busSchedules: BusSchedulesConstants.busSchedules, selectedBusScheduleIndex: nil)
+        return BusSchedulesEntry(date: Date(), busSchedules: BusSchedulesConstants.busSchedules)
     }
     
     func getSnapshot(in context: Context, completion: @escaping (BusSchedulesEntry) -> ()) {
-        let entry = BusSchedulesEntry(date: Date(), busSchedules: getNextBusSchedules(currentDate: DateManager.currentDate(), busSchedules: BusSchedulesConstants.busSchedules), selectedBusScheduleIndex: nil)
+        let entry = BusSchedulesEntry(date: Date(), busSchedules: getNextBusSchedules(currentDate: DateManager.currentDate(), busSchedules: BusSchedulesConstants.busSchedules))
         completion(entry)
     }
     
@@ -38,17 +38,14 @@ struct BusSchedulesTimeLineProvider: TimelineProvider {
             
             let entry = BusSchedulesEntry(
                 date: renderDate,
-                busSchedules: nextBusSchedules,
-                selectedBusScheduleIndex: nil
+                busSchedules: nextBusSchedules
             )
             entries.append(entry)
-            
             previousEntry = entry
         }
                       
         // タイムラインを作成
         let timeline = Timeline(entries: entries, policy: .atEnd)
-        
         
         completion(timeline)
     }
@@ -66,7 +63,12 @@ struct BusSchedulesTimeLineProvider: TimelineProvider {
             busSchedule.arrivalTime >= currentFixedTime
         }
         
-        // 最初の8本を返す
+        // スケジュールが空の場合、先頭から8つを取得して返す
+        if upcomingSchedules.isEmpty {
+            return Array(busSchedules.prefix(8))
+        }
+        
+        // 最初の8本を返す（次の日の分）
         return Array(upcomingSchedules.prefix(8))
     }
 
