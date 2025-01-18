@@ -75,9 +75,6 @@ final class BusScheduleCell: UITableViewCell {
 
     private func calculateDisplayDate(for arrivalTime: BSFixedTime, currentDate: Date) -> String {
         let calendar = Calendar.current
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy/MM/dd"
-        
         let currentTime = BSFixedTime(from: currentDate)
         
         // 到着時間が現在の時刻より前の場合、翌日を返す
@@ -85,11 +82,10 @@ final class BusScheduleCell: UITableViewCell {
             guard let nextDay = calendar.date(byAdding: .day, value: 1, to: currentDate) else {
                 return ""
             }
-            return formatter.string(from: nextDay)
+            return BSDateFormatter.shared.formattedDate(from: nextDay, format: .fullDate)
         }
         
         // 現在の日付を返す
-        return formatter.string(from: currentDate)
+        return BSDateFormatter.shared.formattedDate(from: currentDate, format: .fullDate)
     }
-
 }
