@@ -28,10 +28,10 @@ class SettingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource 
     private func setupUI() {
         view.backgroundColor = .systemBackground
         
-        // バックボタンの色を設定
+        // Backボタンの色を設定
         navigationController?.navigationBar.tintColor = .accent
         
-        // ラベルの設定
+        // 通知の実行をするToggleに対するラベルの設定
         label.text = "通知を実行"
         label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 16)
@@ -42,8 +42,8 @@ class SettingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource 
         // ピッカービューの設定
         pickerView.delegate = self
         pickerView.dataSource = self
-        pickerView.isUserInteractionEnabled = false // 初期状態では無効
-        pickerView.backgroundColor = .lightGray // ピッカービューが無効なときは背景色を灰色に
+        pickerView.isUserInteractionEnabled = toggleSwitch.isOn
+        pickerView.backgroundColor = toggleSwitch.isOn ? .systemBackground : .gray.withAlphaComponent(0.5)
         
         // 角丸を設定
         pickerView.layer.cornerRadius = 15
@@ -78,7 +78,7 @@ class SettingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource 
         
         // アニメーションを追加して状態変更
         UIView.animate(withDuration: 0.3, animations: {
-            self.pickerView.backgroundColor = isOn ? .white : .lightGray // 背景色の変更
+            self.pickerView.backgroundColor = isOn ? .systemBackground : .gray.withAlphaComponent(0.5)
             self.pickerView.isUserInteractionEnabled = isOn // ユーザーインタラクションの有効化/無効化
         })
     }
@@ -97,7 +97,7 @@ class SettingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource 
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         let minutes = timeIntervals[row]
-        return "\(minutes) 分"
+        return "\(minutes) 分前"
     }
     
     // 選択された時間（分数）を取得する関数

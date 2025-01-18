@@ -27,7 +27,7 @@ class BusScheduleCell: UITableViewCell {
         
         nextLabel.font = UIFont.systemFont(ofSize: 14, weight: .bold)
         nextLabel.textAlignment = .center
-        nextLabel.textColor = .red
+        nextLabel.textColor = .red.withAlphaComponent(0.8)
         nextLabel.text = "NEXT"
         nextLabel.isHidden = true
         

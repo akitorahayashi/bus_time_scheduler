@@ -14,7 +14,7 @@ class BusSchedulePresenterTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        presenter = BusSchedulePresenter(busSchedules: kBusSchedules)
+        presenter = BusSchedulePresenter(busSchedules: Constant.busSchedules)
     }
 
     override func tearDown() {
@@ -27,12 +27,12 @@ class BusSchedulePresenterTests: XCTestCase {
         // 初期状態では何も選択されていない
         XCTAssertNil(presenter.currentSelectedIndex)
         
-        // MARK: - インデックス0のバススケジュールを選択
+        // インデックス0のバススケジュールを選択
         presenter.toggleSelection(at: 0)
         XCTAssertEqual(presenter.currentSelectedIndex, 0)
         XCTAssertTrue(presenter.busSchedules[0].isSelected)
         
-        // MARK: - インデックス1のバススケジュールを選択
+        // インデックス1のバススケジュールを選択
         presenter.toggleSelection(at: 1)
         XCTAssertEqual(presenter.currentSelectedIndex, 1)
         XCTAssertFalse(presenter.busSchedules[0].isSelected)
@@ -47,7 +47,7 @@ class BusSchedulePresenterTests: XCTestCase {
     func testToggleSelection_atInvalidIndex() {
         // 不正なインデックスを指定した場合
         presenter.toggleSelection(at: -1)
-        presenter.toggleSelection(at: kBusSchedules.count)
+        presenter.toggleSelection(at: Constant.busSchedules.count)
         XCTAssertNil(presenter.currentSelectedIndex)
     }
     

@@ -10,7 +10,7 @@ import SwiftUI
 
 struct NextBusProvider: TimelineProvider {
     func placeholder(in context: Context) -> NextBusEntry {
-        return NextBusEntry(date: Date(), busSchedules: kBusSchedules, selectedBusScheduleIndex: nil)
+        return NextBusEntry(date: Date(), busSchedules: Constant.busSchedules, selectedBusScheduleIndex: nil)
     }
     
     func getSnapshot(in context: Context, completion: @escaping (NextBusEntry) -> ()) {
@@ -63,7 +63,7 @@ struct NextBusProvider: TimelineProvider {
         let currentTimeString = formatter.string(from: currentDate)
         
         // 現在時刻以降のバスのスケジュールをフィルタリング
-        let upcomingSchedules = kBusSchedules.filter { busSchedule in
+        let upcomingSchedules = Constant.busSchedules.filter { busSchedule in
             return busSchedule.arrivalTime >= currentTimeString
         }
         

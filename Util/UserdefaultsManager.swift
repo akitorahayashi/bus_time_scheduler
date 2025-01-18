@@ -5,9 +5,9 @@
 //  Created by 林 明虎 on 2025/01/15.
 //
 
-enum UserDefaultsManager {
-    static let suitName = "group.com.yourcompany.bus_time_scheduler"
+enum UserDefaultsKeys: String {
+    case suitName = "group.akitorahayashi.bus_time_scheduler"
     // key
-    static let busSchedulesKey = "busSchedules"
-    static let selectedIndexKey = "selectedIndex"
+    case busSchedulesKey = "busSchedules"
+    case selectedIndexKey = "selectedIndex"
 }
