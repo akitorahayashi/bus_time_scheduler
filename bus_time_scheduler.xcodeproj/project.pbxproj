@@ -86,7 +86,8 @@
 		1B4A5BFC2D3B690400CA54A2 /* Exceptions for "Constant" folder in "BusSchedulesWidgetExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Constant.swift,
+				BSAppSettings.swift,
+				BusSchedulesConstants.swift,
 			);
 			target = 1B4A5BDC2D3B676C00CA54A2 /* BusSchedulesWidgetExtension */;
 		};

@@ -5,15 +5,15 @@
 //  Created by 林 明虎 on 2025/01/15.
 //
 
-struct BusSchedule: Codable, Equatable {
+struct BusSchedule {
     var isSelected: Bool
     // FIXME: use `Date
-    let arrivalTime: String
-    let delayedTime: String?
+    let arrivalTime: BSFixedTime
+    let delayedTime: BSFixedTime?
     
-    init(arrivalTime: String) {
+    init(arrivalTime: BSFixedTime, delayedTime: BSFixedTime? = nil) {
         isSelected = false
         self.arrivalTime = arrivalTime
-        self.delayedTime = nil
+        self.delayedTime = delayedTime
     }
 }
