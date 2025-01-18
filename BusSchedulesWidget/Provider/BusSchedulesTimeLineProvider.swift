@@ -1,30 +1,30 @@
 //
-//  NextBusProvider.swift
+//  BusSchedulesTimeLineProvider.swift
 //  bus_time_scheduler
 //
-//  Created by 林 明虎 on 2025/01/15.
+//  Created by 林 明虎 on 2025/01/18.
 //
 
 import WidgetKit
 import SwiftUI
 
-struct NextBusProvider: TimelineProvider {
-    func placeholder(in context: Context) -> NextBusEntry {
-        return NextBusEntry(date: Date(), busSchedules: Constant.busSchedules, selectedBusScheduleIndex: nil)
+struct BusSchedulesTimeLineProvider: TimelineProvider {
+    func placeholder(in context: Context) -> BusSchedulesEntry {
+        return BusSchedulesEntry(date: Date(), busSchedules: Constant.busSchedules, selectedBusScheduleIndex: nil)
     }
     
-    func getSnapshot(in context: Context, completion: @escaping (NextBusEntry) -> ()) {
-        let entry = NextBusEntry(date: Date(), busSchedules: getNextBusSchedules(), selectedBusScheduleIndex: nil)
+    func getSnapshot(in context: Context, completion: @escaping (BusSchedulesEntry) -> ()) {
+        let entry = BusSchedulesEntry(date: Date(), busSchedules: getNextBusSchedules(), selectedBusScheduleIndex: nil)
         completion(entry)
     }
     
-    func getTimeline(in context: Context, completion: @escaping (Timeline<NextBusEntry>) -> ()) {
+    func getTimeline(in context: Context, completion: @escaping (Timeline<BusSchedulesEntry>) -> ()) {
         
-        var entries: [NextBusEntry] = []
+        var entries: [BusSchedulesEntry] = []
                         
         let nextBusSchedules = getNextBusSchedules()
         
-        var previousEntry: NextBusEntry?
+        var previousEntry: BusSchedulesEntry?
         
         for _ in nextBusSchedules {
             
@@ -36,7 +36,7 @@ struct NextBusProvider: TimelineProvider {
                 renderDate = .init()
             }
             
-            let entry = NextBusEntry(
+            let entry = BusSchedulesEntry(
                 date: renderDate,
                 busSchedules: nextBusSchedules,
                 selectedBusScheduleIndex: nil

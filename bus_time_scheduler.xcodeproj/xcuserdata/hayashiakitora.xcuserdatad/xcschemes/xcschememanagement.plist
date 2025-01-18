@@ -4,10 +4,10 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>NextBusWidgetExtension.xcscheme_^#shared#^_</key>
+		<key>BusSchedulesWidgetExtension.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>3</integer>
 		</dict>
 		<key>bus_time_scheduler.xcscheme_^#shared#^_</key>
 		<dict>
@@ -22,12 +22,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>1B4A5BDC2D3B676C00CA54A2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>1BD3AEF82D3776CE0040DCD6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>1BD3AF0E2D3776D00040DCD6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1BD3AF182D3776D00040DCD6</key>
 		<dict>
 			<key>primary</key>
 			<true/>

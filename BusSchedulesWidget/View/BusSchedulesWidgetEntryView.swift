@@ -1,14 +1,14 @@
 //
-//  NextBusWidgetEntryView.swift
+//  BusSchedulesWidgetEntryView.swift
 //  bus_time_scheduler
 //
-//  Created by 林 明虎 on 2025/01/15.
+//  Created by 林 明虎 on 2025/01/18.
 //
 
 import SwiftUI
 
-struct NextBusWidgetEntryView: View {
-    var entry: NextBusProvider.Entry
+struct BusSchedulesWidgetEntryView : View {
+    var entry: BusSchedulesEntry
     @Environment(\.widgetFamily) var widgetFamily
     
     var body: some View {

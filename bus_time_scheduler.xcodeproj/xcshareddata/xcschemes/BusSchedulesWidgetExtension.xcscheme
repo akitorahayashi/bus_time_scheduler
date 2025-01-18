@@ -16,9 +16,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1BD3AF552D37AB020040DCD6"
-               BuildableName = "NextBusWidgetExtension.appex"
-               BlueprintName = "NextBusWidgetExtension"
+               BlueprintIdentifier = "1B4A5BDC2D3B676C00CA54A2"
+               BuildableName = "BusSchedulesWidgetExtension.appex"
+               BlueprintName = "BusSchedulesWidgetExtension"
                ReferencedContainer = "container:bus_time_scheduler.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -62,9 +62,9 @@
          BundleIdentifier = "com.apple.springboard">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1BD3AF552D37AB020040DCD6"
-            BuildableName = "NextBusWidgetExtension.appex"
-            BlueprintName = "NextBusWidgetExtension"
+            BlueprintIdentifier = "1B4A5BDC2D3B676C00CA54A2"
+            BuildableName = "BusSchedulesWidgetExtension.appex"
+            BlueprintName = "BusSchedulesWidgetExtension"
             ReferencedContainer = "container:bus_time_scheduler.xcodeproj">
          </BuildableReference>
       </RemoteRunnable>
