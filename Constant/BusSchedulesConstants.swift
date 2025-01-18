@@ -7,8 +7,6 @@
 
 import Foundation
 
-定数の責務の分類を行い、BusSchedulesConstantsのbusSchedulesはタプルから初期化される形とした
-
 enum BusSchedulesConstants {
     static let selectedBusScheduleIndex: Int = 0
 

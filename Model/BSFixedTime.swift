@@ -5,14 +5,15 @@
 //  Created by 林 明虎 on 2025/01/18.
 //
 
-struct BSFixedTime {
+import Foundation
+
+struct BSFixedTime: Hashable, Comparable {
     let hour: Int
     let minute: Int
     
     enum InitializationError: Error {
         case invalidHour(Int)
         case invalidMinute(Int)
-        case invalidFormat(String)
     }
     
     init(hour: Int, minute: Int) throws {
@@ -26,7 +27,21 @@ struct BSFixedTime {
         self.minute = minute
     }
     
+    init(from date: Date) {
+        let components = Calendar.current.dateComponents([.hour, .minute], from: date)
+        self.hour = components.hour ?? 0
+        self.minute = components.minute ?? 0
+    }
+    
     func formatted() -> String {
         String(format: "%02d:%02d", hour, minute)
+    }
+    
+    // Comparable プロトコルに準拠するための実装
+    static func < (lhs: BSFixedTime, rhs: BSFixedTime) -> Bool {
+        if lhs.hour != rhs.hour {
+            return lhs.hour < rhs.hour
+        }
+        return lhs.minute < rhs.minute
     }
 }

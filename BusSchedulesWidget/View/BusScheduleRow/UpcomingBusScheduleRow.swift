@@ -24,7 +24,7 @@ struct UpcomingBusScheduleRow: View {
             }
             
             // arrivalTimeを表示
-            Text(busSchedule.arrivalTime)
+            Text(busSchedule.arrivalTime.formatted())
                 .font(.system(size: 14))
                 .fontWeight(.bold)
                 .foregroundColor(.gray)

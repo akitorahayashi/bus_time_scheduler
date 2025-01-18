@@ -18,7 +18,7 @@ struct FirstBusScheduleRow: View {
                 .fontWeight(.bold)
                 .foregroundColor(.gray.opacity(0.9))
             
-            Text(busSchedule.arrivalTime)
+            Text(busSchedule.arrivalTime.formatted())
                 .font(.system(size: 18))
                 .fontWeight(.bold)
                 .foregroundColor(.gray.opacity(0.9))
