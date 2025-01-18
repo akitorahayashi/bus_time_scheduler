@@ -55,12 +55,12 @@ final class BusScheduleCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(with busSchedule: BusSchedule, currentDate: Date, isNextBus: Bool) {
+    func configure(with busSchedule: BusSchedule, isNextBus: Bool) {
         let arrivalTime = busSchedule.arrivalTime
         titleLabel.text = arrivalTime.formatted()
         
         // 到着年月日を取得
-        let displayDate = calculateDisplayDate(for: arrivalTime, currentDate: currentDate)
+        let displayDate = calculateDisplayDate(for: arrivalTime, currentDate: DateManager.currentDate())
         dateLabel.text = displayDate
         
         // 次のバスのスケジュールならNEXTのラベルを表示する

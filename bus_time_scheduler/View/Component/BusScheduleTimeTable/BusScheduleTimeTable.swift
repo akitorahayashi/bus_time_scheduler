@@ -38,9 +38,7 @@ final class BusScheduleTimeTable: UIView, UITableViewDataSource, UITableViewDele
     }
     
     func scrollToNearestTime() {
-        let currentDate = DateManager.currentDate()
-        let currentTimeString = DateFormatter.localizedString(from: currentDate, dateStyle: .none, timeStyle: .short)
-        if let nearestIndex = presenter.nearestScheduleIndex(currentTime: currentTimeString) {
+        if let nearestIndex = presenter.nearestScheduleIndex(busSchedules: BusSchedulesConstants.busSchedules, currentTime: DateManager.currentDate()) {
             DispatchQueue.main.async {
                 self.tableView.scrollToRow(at: IndexPath(row: nearestIndex, section: 0), at: .top, animated: true)
             }
@@ -58,7 +56,7 @@ final class BusScheduleTimeTable: UIView, UITableViewDataSource, UITableViewDele
         
         if let schedule = presenter.busSchedule(at: indexPath.row) {
             // Check if this is the next bus
-            let isNextBus = presenter.nearestScheduleIndex(currentTime: DateFormatter.localizedString(from: DateManager.currentDate(), dateStyle: .none, timeStyle: .short)) == indexPath.row
+            let isNextBus: Bool = presenter.nearestScheduleIndex(busSchedules: BusSchedulesConstants.busSchedules, currentTime: DateManager.currentDate()) == indexPath.row
             cell.configure(with: schedule, isNextBus: isNextBus)
             cell.selectionStyle = .none
         } else {
@@ -77,6 +75,7 @@ final class BusScheduleTimeTable: UIView, UITableViewDataSource, UITableViewDele
         }
         tableView.reloadRows(at: [indexPath], with: .automatic)
     }
+    
     // MARK: - Reload Data Method
     func reloadData() {
         // テーブルビューをリロード

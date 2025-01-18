@@ -12,8 +12,8 @@ final class BusSchedulePresenter {
     
     private(set) var selectedBusScheduleIndex: Int?
     
-    init(busSchedules: [BusSchedule] = []) {
-        self.busSchedules = busSchedules
+    init() {
+        self.busSchedules = BusSchedulesConstants.busSchedules
         self.selectedBusScheduleIndex = nil
     }
     
