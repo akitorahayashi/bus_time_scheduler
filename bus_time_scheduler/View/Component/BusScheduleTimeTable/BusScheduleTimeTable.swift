@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BusScheduleTimeTable: UIView, UITableViewDataSource, UITableViewDelegate {
+final class BusScheduleTimeTable: UIView, UITableViewDataSource, UITableViewDelegate {
     private let presenter: BusSchedulePresenter
     private let tableView = UITableView()
     

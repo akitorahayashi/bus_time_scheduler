@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SettingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+final class SettingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     private let pickerView = UIPickerView()
     private let toggleSwitch = UISwitch()
