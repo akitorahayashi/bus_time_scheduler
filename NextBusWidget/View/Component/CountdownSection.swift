@@ -19,9 +19,11 @@ struct CountdownSection: View {
                 .foregroundColor(.accent)
             Group {
                 if let arrivalTime = arrivalTime {
+                    // 時間が選択されている場合
                     let countdown = calculateTimeUntil(arrivalTime, from: referenceDate)
                     Text(countdown)
                 } else {
+                    // 時間が選択されていない場合
                     Text("N/A")
                 }
             }

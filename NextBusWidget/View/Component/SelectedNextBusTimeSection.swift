@@ -18,9 +18,11 @@ struct SelectedNextBusTimeSection: View {
                 .foregroundColor(.accent)
             Group {
                 if let arrivalTime = arrivalTime {
+                    // 時間が選択されている場合
                     Text(arrivalTime.formatted())
                 } else {
-                    Text("No schedule selected")
+                    // 時間が選択されていない場合
+                    Text("N/A")
                 }
             }
             .font(.system(size: 18))

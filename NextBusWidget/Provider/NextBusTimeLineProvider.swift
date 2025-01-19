@@ -26,15 +26,19 @@ struct NextBusTimeLineProvider: TimelineProvider {
         
         // 現在のバススケジュールを取得
         guard let selectedBus = fetchSelectedBusSchedule() else {
-            // selectedBusSchedule が nil の場合は更新しない
-            let timeline = Timeline<NextBusEntry>(entries: [], policy: .never)
+            // selectedBusSchedule が nil の場合は1回だけエントリーを作成し、更新しない
+            let entry = NextBusEntry(date: currentDate, selectedBusSchedule: nil)
+            entries.append(entry)
+            
+            // タイムラインを作成（更新なし）
+            let timeline = Timeline(entries: entries, policy: .never)
             completion(timeline)
             return
         }
         
         // 60分間、1分ごとにエントリーを作成
         var previousEntry: NextBusEntry?
-        for minuteOffset in 0..<60 {
+        for _ in 0..<60 {
             let renderDate: Date
             if let previousEntry = previousEntry {
                 renderDate = previousEntry.date.addingTimeInterval(60)
@@ -50,22 +54,32 @@ struct NextBusTimeLineProvider: TimelineProvider {
             previousEntry = entry
         }
         
-        // タイムラインを作成
+        // タイムラインを作成（最後に再描画を要求）
         let timeline = Timeline(entries: entries, policy: .atEnd)
         completion(timeline)
     }
 
+
     /// AppGroupsから選択されたバススケジュールを取得
     private func fetchSelectedBusSchedule() -> BusSchedule? {
         let userDefaults = UserDefaults(suiteName: UserDefaultsKeys.suitName.rawValue)
+        
+        // busSchedulesKey からデータを取得
         guard let data = userDefaults?.data(forKey: UserDefaultsKeys.busSchedulesKey.rawValue),
-              let busSchedules = try? JSONDecoder().decode([BusSchedule].self, from: data),
-              let selectedIndex = userDefaults?.integer(forKey: UserDefaultsKeys.selectedIndexKey.rawValue),
+              let busSchedules = try? JSONDecoder().decode([BusSchedule].self, from: data) else {
+            return nil
+        }
+        
+        // selectedIndexKey の存在を確認して値を取得
+        guard let selectedIndex = userDefaults?.object(forKey: UserDefaultsKeys.selectedIndexKey.rawValue) as? Int,
               busSchedules.indices.contains(selectedIndex) else {
             return nil
         }
+        
+        print(selectedIndex)
         return busSchedules[selectedIndex]
     }
+
 }
 
 /// `Date`の分の開始時刻を取得するための拡張
