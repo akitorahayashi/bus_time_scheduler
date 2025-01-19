@@ -57,7 +57,6 @@ final class BusScheduleTimeTable: UIView, UITableViewDataSource, UITableViewDele
         if let schedule = presenter.busSchedule(at: indexPath.row) {
             // Check if this is the next bus
             let isNextBus: Bool = presenter.nearestScheduleIndex(currentTime: BSDateUtilities.currentDate()) == indexPath.row
-            print(schedule.isSelected)
             cell.configure(with: schedule, isNextBus: isNextBus)
             cell.selectionStyle = .none
         } else {

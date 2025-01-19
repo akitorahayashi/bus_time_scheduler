@@ -31,7 +31,7 @@ struct CountdownSection: View {
         }
     }
 
-    /// 残り時間を計算
+    /// カウントダウンの時間を計算
     private func calculateTimeUntil(_ arrivalTime: String, from referenceDate: Date) -> String? {
         let calendar = Calendar.current
         
@@ -42,13 +42,19 @@ struct CountdownSection: View {
         }
         
         // 基準日時から到着時間を生成
-        guard let targetDate = calendar.date(bySettingHour: hour, minute: minute, second: 0, of: referenceDate),
-              targetDate >= referenceDate else {
+        var targetDate = calendar.date(bySettingHour: hour, minute: minute, second: 0, of: referenceDate)
+        
+        // 到着時間が基準日時よりも前の場合、1日加算して翌日の時間に設定
+        if let targetDateUnwrapped = targetDate, targetDateUnwrapped < referenceDate {
+            targetDate = calendar.date(byAdding: .day, value: 1, to: targetDateUnwrapped)
+        }
+        
+        guard let validTargetDate = targetDate else {
             return nil
         }
         
         // 基準日時からターゲット時刻までの時間差を計算
-        var remainingTime = calendar.dateComponents([.hour, .minute, .second], from: referenceDate, to: targetDate)
+        var remainingTime = calendar.dateComponents([.hour, .minute, .second], from: referenceDate, to: validTargetDate)
         
         // 秒を基に切り上げ処理を行う
         if let seconds = remainingTime.second, seconds > 0 {
@@ -60,4 +66,5 @@ struct CountdownSection: View {
         
         return String(format: "%02d:%02d", hours, minutes)
     }
+
 }
