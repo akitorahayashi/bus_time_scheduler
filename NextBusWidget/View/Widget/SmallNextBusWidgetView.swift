@@ -11,13 +11,29 @@ struct SmallNextBusWidgetView: View {
     var entry: NextBusEntry
 
     var body: some View {
-        VStack(spacing: 8) {
-            SelectedNextBusTimeSection(arrivalTime: entry.selectedBusSchedule?.arrivalTime)
+        VStack {
+            Text("Rendered at:")
+                .font(.caption)
+                .foregroundColor(.gray)
+            Text(entry.date.formatted(date: .omitted, time: .shortened))
+                .font(.caption)
+                .foregroundColor(.gray)
+                .padding(.bottom, 1)
             
-            Divider()
-            
-            CountdownSection(arrivalTime: entry.selectedBusSchedule?.arrivalTime, referenceDate: entry.date)
+            VStack(spacing: 8) {
+                
+                SelectedNextBusTimeSection(arrivalTime: entry.selectedBusSchedule?.arrivalTime)
+                
+                Divider()
+                    .padding(.all, 1)
+                    .overlay(
+                        Rectangle()
+                            .frame(height: 1)
+                            .foregroundColor(.accent)
+                    )
+                
+                CountdownSection(arrivalTime: entry.selectedBusSchedule?.arrivalTime, referenceDate: entry.date)
+            }
         }
-        .padding()
     }
 }

@@ -12,12 +12,20 @@ struct SelectedNextBusTimeSection: View {
 
     var body: some View {
         VStack {
-            Text("Next Bus:")
-            if let arrivalTime = arrivalTime {
-                Text(arrivalTime.formatted())
-            } else {
-                Text("No schedule selected")
+            Text(arrivalTime == nil ? "NEXT" : "SELECTED")
+                .fontWeight(.bold)
+                .font(.system(size: 12))
+                .foregroundColor(.accent)
+            Group {
+                if let arrivalTime = arrivalTime {
+                    Text(arrivalTime.formatted())
+                } else {
+                    Text("No schedule selected")
+                }
             }
+            .font(.system(size: 18))
+            .fontWeight(.bold)
+            .foregroundColor(.gray.opacity(0.9))
         }
     }
 }

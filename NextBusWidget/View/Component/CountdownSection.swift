@@ -13,13 +13,21 @@ struct CountdownSection: View {
 
     var body: some View {
         VStack {
-            Text("Countdown:")
-            if let arrivalTime = arrivalTime {
-                let countdown = calculateTimeUntil(arrivalTime, from: referenceDate)
-                Text(countdown)
-            } else {
-                Text("N/A")
+            Text("COUNTDOWN")
+                .fontWeight(.bold)
+                .font(.system(size: 12))
+                .foregroundColor(.accent)
+            Group {
+                if let arrivalTime = arrivalTime {
+                    let countdown = calculateTimeUntil(arrivalTime, from: referenceDate)
+                    Text(countdown)
+                } else {
+                    Text("N/A")
+                }
             }
+            .font(.system(size: 18))
+            .fontWeight(.bold)
+            .foregroundColor(.gray.opacity(0.9))
         }
     }
 

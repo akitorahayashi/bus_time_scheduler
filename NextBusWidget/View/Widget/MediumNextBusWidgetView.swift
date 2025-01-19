@@ -15,10 +15,17 @@ struct MediumNextBusWidgetView: View {
             Text("Rendered at: \(entry.date.formatted())")
                 .font(.caption)
                 .foregroundColor(.gray)
+                .padding(.bottom, 1)
             
             SelectedNextBusTimeSection(arrivalTime: entry.selectedBusSchedule?.arrivalTime)
             
             Divider()
+                .padding(.all, 0.2)
+                .overlay(
+                    Rectangle()
+                        .frame(height: 1)
+                        .foregroundColor(.accent)
+                )
             
             CountdownSection(arrivalTime: entry.selectedBusSchedule?.arrivalTime, referenceDate: entry.date)
         }
