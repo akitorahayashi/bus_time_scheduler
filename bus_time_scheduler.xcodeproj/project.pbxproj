@@ -137,6 +137,13 @@
 			);
 			target = 1BD3AEF82D3776CE0040DCD6 /* bus_time_scheduler */;
 		};
+		1BDE4E382D3CD34C0042A087 /* Exceptions for "Constant" folder in "NextBusWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				BusSchedulesConstants.swift,
+			);
+			target = 1BE5BDCF2D3C8CBC00E07410 /* NextBusWidgetExtension */;
+		};
 		1BE5BDE12D3C8CBF00E07410 /* Exceptions for "NextBusWidget" folder in "NextBusWidgetExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -210,6 +217,7 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				1B4A5BFC2D3B690400CA54A2 /* Exceptions for "Constant" folder in "BusSchedulesWidgetExtension" target */,
+				1BDE4E382D3CD34C0042A087 /* Exceptions for "Constant" folder in "NextBusWidgetExtension" target */,
 			);
 			path = Constant;
 			sourceTree = "<group>";

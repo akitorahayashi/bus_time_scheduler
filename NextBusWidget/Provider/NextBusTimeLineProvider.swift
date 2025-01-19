@@ -11,78 +11,68 @@ import SwiftUI
 
 struct NextBusTimeLineProvider: TimelineProvider {
     func placeholder(in context: Context) -> NextBusEntry {
-        NextBusEntry(date: Date(), selectedBusSchedule: nil)
+        NextBusEntry(date: Date(), corrBusSchedules: [], selectedBusScheduleIndex: nil)
     }
 
     func getSnapshot(in context: Context, completion: @escaping (NextBusEntry) -> Void) {
-        let selectedBus = fetchSelectedBusSchedule()
-        let entry = NextBusEntry(date: Date(), selectedBusSchedule: selectedBus)
+        let schedules = fetchBusSchedules()
+        let selectedIndex = fetchSelectedBusIndex()
+        let entry = NextBusEntry(date: Date().startOfMinute(), corrBusSchedules: schedules, selectedBusScheduleIndex: selectedIndex)
         completion(entry)
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<NextBusEntry>) -> Void) {
         var entries: [NextBusEntry] = []
-        let currentDate = Date()
+        let currentDate = Date().startOfMinute()
         
-        // 現在のバススケジュールを取得
-        guard let selectedBus = fetchSelectedBusSchedule() else {
-            // selectedBusSchedule が nil の場合は1回だけエントリーを作成し、更新しない
-            let entry = NextBusEntry(date: currentDate, selectedBusSchedule: nil)
+        let schedules = fetchBusSchedules()
+        let selectedIndex = fetchSelectedBusIndex()
+
+        if schedules.isEmpty {
+            // スケジュールが存在しない場合の処理
+            let entry = NextBusEntry(date: currentDate, corrBusSchedules: schedules, selectedBusScheduleIndex: nil)
             entries.append(entry)
-            
-            // タイムラインを作成（更新なし）
             let timeline = Timeline(entries: entries, policy: .never)
             completion(timeline)
             return
         }
-        
+
         // 60分間、1分ごとにエントリーを作成
-        var previousEntry: NextBusEntry?
-        for _ in 0..<60 {
-            let renderDate: Date
-            if let previousEntry = previousEntry {
-                renderDate = previousEntry.date.addingTimeInterval(60)
-            } else {
-                renderDate = currentDate.startOfMinute()
-            }
-            
+        for minuteOffset in 0..<60 {
+            let entryDate = currentDate.addingTimeInterval(TimeInterval(minuteOffset * 60))
             let entry = NextBusEntry(
-                date: renderDate,
-                selectedBusSchedule: selectedBus
+                date: entryDate,
+                corrBusSchedules: schedules,
+                selectedBusScheduleIndex: selectedIndex
             )
             entries.append(entry)
-            previousEntry = entry
         }
-        
-        // タイムラインを作成（最後に再描画を要求）
+
         let timeline = Timeline(entries: entries, policy: .atEnd)
         completion(timeline)
     }
 
-
-    /// AppGroupsから選択されたバススケジュールを取得
-    private func fetchSelectedBusSchedule() -> BusSchedule? {
+    /// AppGroups からバススケジュールリストを取得
+    private func fetchBusSchedules() -> [BusSchedule] {
         let userDefaults = UserDefaults(suiteName: UserDefaultsKeys.suitName.rawValue)
-        
-        // busSchedulesKey からデータを取得
         guard let data = userDefaults?.data(forKey: UserDefaultsKeys.busSchedulesKey.rawValue),
               let busSchedules = try? JSONDecoder().decode([BusSchedule].self, from: data) else {
-            return nil
+            return []
         }
-        
-        // selectedIndexKey の存在を確認して値を取得
-        guard let selectedIndex = userDefaults?.object(forKey: UserDefaultsKeys.selectedIndexKey.rawValue) as? Int,
-              busSchedules.indices.contains(selectedIndex) else {
-            return nil
-        }
-        
-        print(selectedIndex)
-        return busSchedules[selectedIndex]
+        return busSchedules
     }
 
+    /// AppGroups から選択されたバススケジュールのインデックスを取得
+    private func fetchSelectedBusIndex() -> Int? {
+        let userDefaults = UserDefaults(suiteName: UserDefaultsKeys.suitName.rawValue)
+        guard let selectedIndex = userDefaults?.object(forKey: UserDefaultsKeys.selectedIndexKey.rawValue) as? Int else {
+            return nil
+        }
+        return selectedIndex
+    }
 }
 
-/// `Date`の分の開始時刻を取得するための拡張
+/// `Date` の分の開始時刻を取得するための拡張
 private extension Date {
     func startOfMinute() -> Date {
         let calendar = Calendar.current

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CountdownSection: View {
-    let arrivalTime: BSFixedTime?
+    let arrivalTime: String?
     let referenceDate: Date
 
     var body: some View {
@@ -18,12 +18,10 @@ struct CountdownSection: View {
                 .font(.system(size: 12))
                 .foregroundColor(.accent)
             Group {
-                if let arrivalTime = arrivalTime {
-                    // 時間が選択されている場合
-                    let countdown = calculateTimeUntil(arrivalTime, from: referenceDate)
+                if let arrivalTime = arrivalTime, let countdown = calculateTimeUntil(arrivalTime, from: referenceDate) {
+                    // 時間が選択されている場合または最も早い時間がある場合
                     Text(countdown)
                 } else {
-                    // 時間が選択されていない場合
                     Text("N/A")
                 }
             }
@@ -34,12 +32,19 @@ struct CountdownSection: View {
     }
 
     /// 残り時間を計算
-    private func calculateTimeUntil(_ arrivalTime: BSFixedTime, from referenceDate: Date) -> String {
+    private func calculateTimeUntil(_ arrivalTime: String, from referenceDate: Date) -> String? {
         let calendar = Calendar.current
         
+        // 到着時間をパース
+        let components = arrivalTime.split(separator: ":").compactMap { Int($0) }
+        guard components.count == 2, let hour = components.first, let minute = components.last else {
+            return nil
+        }
+        
         // 基準日時から到着時間を生成
-        guard let targetDate = arrivalTime.toDate(from: referenceDate) else {
-            return "Invalid Time"
+        guard let targetDate = calendar.date(bySettingHour: hour, minute: minute, second: 0, of: referenceDate),
+              targetDate >= referenceDate else {
+            return nil
         }
         
         // 基準日時からターゲット時刻までの時間差を計算
@@ -54,27 +59,5 @@ struct CountdownSection: View {
         let minutes = remainingTime.minute ?? 0
         
         return String(format: "%02d:%02d", hours, minutes)
-    }
-}
-
-private extension BSFixedTime {
-    /// 基準日を基にBSFixedTimeをDateに変換
-    func toDate(from referenceDate: Date) -> Date? {
-        let calendar = Calendar.current
-        
-        // 今日の到着時間
-        if let todayArrivalDate = calendar.date(bySettingHour: self.hour,
-                                                minute: self.minute,
-                                                second: 0,
-                                                of: referenceDate),
-           todayArrivalDate >= referenceDate {
-            return todayArrivalDate
-        }
-        
-        // 今日の時間を過ぎている場合は翌日の時間とみなす
-        return calendar.date(byAdding: .day, value: 1, to: calendar.date(bySettingHour: self.hour,
-                                                                         minute: self.minute,
-                                                                         second: 0,
-                                                                         of: referenceDate)!)
     }
 }
