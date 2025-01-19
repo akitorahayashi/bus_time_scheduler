@@ -68,7 +68,7 @@ final class BusSchedulePresenter {
             self.busSchedules = savedSchedules
         }
         
-        if let savedIndex = userDefaults?.integer(forKey: UserDefaultsKeys.selectedIndexKey.rawValue),
+        if let savedIndex = userDefaults?.object(forKey: UserDefaultsKeys.selectedIndexKey.rawValue) as? Int,
            savedIndex >= 0 && savedIndex < busSchedules.count {
             self.selectedBusScheduleIndex = savedIndex
             busSchedules[savedIndex].isSelected = true
