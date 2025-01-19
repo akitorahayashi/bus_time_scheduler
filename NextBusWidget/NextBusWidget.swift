@@ -22,6 +22,7 @@ struct NextBusWidget: Widget {
                     .background()
             }
         }
+        .supportedFamilies([.systemSmall, .systemMedium])
         .configurationDisplayName("Next Bus Widget")
         .description("Record the selected bus time and display a countdown until the next departure.")
     }

@@ -5,30 +5,37 @@
 //  Created by 林 明虎 on 2025/01/19.
 //
 
+import Foundation
 import WidgetKit
 import SwiftUI
 
 struct NextBusTimeLineProvider: TimelineProvider {
     func placeholder(in context: Context) -> NextBusEntry {
-        NextBusEntry(date: Date())
+        NextBusEntry(date: Date(), selectedBusSchedule: nil)
     }
 
     func getSnapshot(in context: Context, completion: @escaping (NextBusEntry) -> ()) {
-        let entry = NextBusEntry(date: Date())
+        let selectedBus = loadSelectedBusSchedule()
+        let entry = NextBusEntry(date: Date(), selectedBusSchedule: selectedBus)
         completion(entry)
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<NextBusEntry>) -> ()) {
-        var entries: [NextBusEntry] = []
-
-        let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = NextBusEntry(date: entryDate)
-            entries.append(entry)
-        }
-
-        let timeline = Timeline<NextBusEntry>(entries: entries, policy: .atEnd)
+        let selectedBus = loadSelectedBusSchedule()
+        let entry = NextBusEntry(date: Date(), selectedBusSchedule: selectedBus)
+        let timeline = Timeline(entries: [entry], policy: .never)
         completion(timeline)
     }
+
+    private func loadSelectedBusSchedule() -> BusSchedule? {
+        let userDefaults = UserDefaults(suiteName: UserDefaultsKeys.suitName.rawValue)
+        guard let data = userDefaults?.data(forKey: UserDefaultsKeys.busSchedulesKey.rawValue),
+              let busSchedules = try? JSONDecoder().decode([BusSchedule].self, from: data),
+              let selectedIndex = userDefaults?.integer(forKey: UserDefaultsKeys.selectedIndexKey.rawValue),
+              busSchedules.indices.contains(selectedIndex) else {
+            return nil
+        }
+        return busSchedules[selectedIndex]
+    }
 }
+

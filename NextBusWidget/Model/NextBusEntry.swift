@@ -9,4 +9,5 @@ import WidgetKit
 
 struct NextBusEntry: TimelineEntry {
     let date: Date
+    let selectedBusSchedule: BusSchedule?
 }

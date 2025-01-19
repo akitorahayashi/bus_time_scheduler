@@ -7,13 +7,20 @@
 
 import SwiftUI
 
-struct NextBusWidgetEntryView : View {
-    var entry: NextBusTimeLineProvider.Entry
+struct NextBusWidgetEntryView: View {
+    var entry: NextBusEntry
 
     var body: some View {
         VStack {
-            Text("Time:")
-            Text(entry.date, style: .time)
+            Text("Next Bus:")
+            if let selectedBus = entry.selectedBusSchedule {
+                Text(selectedBus.arrivalTime.formatted())
+                    .font(.headline)
+            } else {
+                Text("No schedule selected")
+                    .font(.caption)
+            }
         }
+        .padding()
     }
 }

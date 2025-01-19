@@ -144,6 +144,21 @@
 			);
 			target = 1BE5BDCF2D3C8CBC00E07410 /* NextBusWidgetExtension */;
 		};
+		1BE5BDED2D3C911300E07410 /* Exceptions for "Model" folder in "NextBusWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				BSFixedTime.swift,
+				BusSchedule.swift,
+			);
+			target = 1BE5BDCF2D3C8CBC00E07410 /* NextBusWidgetExtension */;
+		};
+		1BE5BDEF2D3C912800E07410 /* Exceptions for "Util" folder in "NextBusWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				UserDefaultsKeys.swift,
+			);
+			target = 1BE5BDCF2D3C8CBC00E07410 /* NextBusWidgetExtension */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -159,6 +174,7 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				1B4A5BFA2D3B68F800CA54A2 /* Exceptions for "Util" folder in "BusSchedulesWidgetExtension" target */,
+				1BE5BDEF2D3C912800E07410 /* Exceptions for "Util" folder in "NextBusWidgetExtension" target */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -185,6 +201,7 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				1B4A5BF82D3B68EA00CA54A2 /* Exceptions for "Model" folder in "BusSchedulesWidgetExtension" target */,
+				1BE5BDED2D3C911300E07410 /* Exceptions for "Model" folder in "NextBusWidgetExtension" target */,
 			);
 			path = Model;
 			sourceTree = "<group>";
