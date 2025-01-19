@@ -5,9 +5,8 @@
 //  Created by 林 明虎 on 2025/01/15.
 //
 
-struct BusSchedule {
+struct BusSchedule: Codable {
     var isSelected: Bool
-    // FIXME: use `Date
     let arrivalTime: BSFixedTime
     let delayedTime: BSFixedTime?
     

@@ -10,6 +10,9 @@
 		1B4A5BDE2D3B676D00CA54A2 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BD3AF582D37AB020040DCD6 /* WidgetKit.framework */; };
 		1B4A5BDF2D3B676D00CA54A2 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BD3AF5A2D37AB020040DCD6 /* SwiftUI.framework */; };
 		1B4A5BEA2D3B676F00CA54A2 /* BusSchedulesWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 1B4A5BDD2D3B676C00CA54A2 /* BusSchedulesWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		1BE5BDD12D3C8CBC00E07410 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BD3AF582D37AB020040DCD6 /* WidgetKit.framework */; };
+		1BE5BDD22D3C8CBC00E07410 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BD3AF5A2D37AB020040DCD6 /* SwiftUI.framework */; };
+		1BE5BDDD2D3C8CBF00E07410 /* NextBusWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 1BE5BDD02D3C8CBC00E07410 /* NextBusWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +44,13 @@
 			remoteGlobalIDString = 1BD3AEF82D3776CE0040DCD6;
 			remoteInfo = bus_time_scheduler;
 		};
+		1BE5BDDB2D3C8CBF00E07410 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1BD3AEF12D3776CE0040DCD6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1BE5BDCF2D3C8CBC00E07410;
+			remoteInfo = NextBusWidgetExtension;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -50,6 +60,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				1BE5BDDD2D3C8CBF00E07410 /* NextBusWidgetExtension.appex in Embed Foundation Extensions */,
 				1B4A5BEA2D3B676F00CA54A2 /* BusSchedulesWidgetExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
@@ -83,6 +94,8 @@
 		1BD3AF192D3776D00040DCD6 /* bus_time_schedulerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = bus_time_schedulerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BD3AF582D37AB020040DCD6 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		1BD3AF5A2D37AB020040DCD6 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		1BE5BDD02D3C8CBC00E07410 /* NextBusWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NextBusWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		1BE5BDEB2D3C8EE900E07410 /* NextBusWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NextBusWidgetExtension.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -124,6 +137,28 @@
 			);
 			target = 1BD3AEF82D3776CE0040DCD6 /* bus_time_scheduler */;
 		};
+		1BE5BDE12D3C8CBF00E07410 /* Exceptions for "NextBusWidget" folder in "NextBusWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 1BE5BDCF2D3C8CBC00E07410 /* NextBusWidgetExtension */;
+		};
+		1BE5BDED2D3C911300E07410 /* Exceptions for "Model" folder in "NextBusWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				BSFixedTime.swift,
+				BusSchedule.swift,
+			);
+			target = 1BE5BDCF2D3C8CBC00E07410 /* NextBusWidgetExtension */;
+		};
+		1BE5BDEF2D3C912800E07410 /* Exceptions for "Util" folder in "NextBusWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				UserDefaultsKeys.swift,
+			);
+			target = 1BE5BDCF2D3C8CBC00E07410 /* NextBusWidgetExtension */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -139,6 +174,7 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				1B4A5BFA2D3B68F800CA54A2 /* Exceptions for "Util" folder in "BusSchedulesWidgetExtension" target */,
+				1BE5BDEF2D3C912800E07410 /* Exceptions for "Util" folder in "NextBusWidgetExtension" target */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -165,6 +201,7 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				1B4A5BF82D3B68EA00CA54A2 /* Exceptions for "Model" folder in "BusSchedulesWidgetExtension" target */,
+				1BE5BDED2D3C911300E07410 /* Exceptions for "Model" folder in "NextBusWidgetExtension" target */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -175,6 +212,14 @@
 				1B4A5BFC2D3B690400CA54A2 /* Exceptions for "Constant" folder in "BusSchedulesWidgetExtension" target */,
 			);
 			path = Constant;
+			sourceTree = "<group>";
+		};
+		1BE5BDD32D3C8CBC00E07410 /* NextBusWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				1BE5BDE12D3C8CBF00E07410 /* Exceptions for "NextBusWidget" folder in "NextBusWidgetExtension" target */,
+			);
+			path = NextBusWidget;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -207,6 +252,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1BE5BDCD2D3C8CBC00E07410 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1BE5BDD22D3C8CBC00E07410 /* SwiftUI.framework in Frameworks */,
+				1BE5BDD12D3C8CBC00E07410 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,6 +382,7 @@
 		1BD3AEF02D3776CE0040DCD6 = {
 			isa = PBXGroup;
 			children = (
+				1BE5BDEB2D3C8EE900E07410 /* NextBusWidgetExtension.entitlements */,
 				1B4A5C092D3B6C2A00CA54A2 /* BusSchedulesWidgetExtension.entitlements */,
 				1B5FD5332D38AFB300163C62 /* Util */,
 				1BD3AF822D37ABF70040DCD6 /* Constant */,
@@ -336,6 +391,7 @@
 				1BD3AF122D3776D00040DCD6 /* bus_time_schedulerTests */,
 				1BD3AF1C2D3776D00040DCD6 /* bus_time_schedulerUITests */,
 				1B4A5BE02D3B676D00CA54A2 /* BusSchedulesWidget */,
+				1BE5BDD32D3C8CBC00E07410 /* NextBusWidget */,
 				1BD3AF572D37AB020040DCD6 /* Frameworks */,
 				1BD3AEFA2D3776CE0040DCD6 /* Products */,
 			);
@@ -348,6 +404,7 @@
 				1BD3AF0F2D3776D00040DCD6 /* bus_time_schedulerTests.xctest */,
 				1BD3AF192D3776D00040DCD6 /* bus_time_schedulerUITests.xctest */,
 				1B4A5BDD2D3B676C00CA54A2 /* BusSchedulesWidgetExtension.appex */,
+				1BE5BDD02D3C8CBC00E07410 /* NextBusWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -401,6 +458,7 @@
 			);
 			dependencies = (
 				1B4A5BE92D3B676F00CA54A2 /* PBXTargetDependency */,
+				1BE5BDDC2D3C8CBF00E07410 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				1B5FD5332D38AFB300163C62 /* Util */,
@@ -462,6 +520,28 @@
 			productReference = 1BD3AF192D3776D00040DCD6 /* bus_time_schedulerUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		1BE5BDCF2D3C8CBC00E07410 /* NextBusWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1BE5BDE02D3C8CBF00E07410 /* Build configuration list for PBXNativeTarget "NextBusWidgetExtension" */;
+			buildPhases = (
+				1BE5BDCC2D3C8CBC00E07410 /* Sources */,
+				1BE5BDCD2D3C8CBC00E07410 /* Frameworks */,
+				1BE5BDCE2D3C8CBC00E07410 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				1BE5BDD32D3C8CBC00E07410 /* NextBusWidget */,
+			);
+			name = NextBusWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = NextBusWidgetExtension;
+			productReference = 1BE5BDD02D3C8CBC00E07410 /* NextBusWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -486,6 +566,9 @@
 						CreatedOnToolsVersion = 16.0;
 						TestTargetID = 1BD3AEF82D3776CE0040DCD6;
 					};
+					1BE5BDCF2D3C8CBC00E07410 = {
+						CreatedOnToolsVersion = 16.0;
+					};
 				};
 			};
 			buildConfigurationList = 1BD3AEF42D3776CE0040DCD6 /* Build configuration list for PBXProject "bus_time_scheduler" */;
@@ -506,6 +589,7 @@
 				1BD3AF0E2D3776D00040DCD6 /* bus_time_schedulerTests */,
 				1BD3AF182D3776D00040DCD6 /* bus_time_schedulerUITests */,
 				1B4A5BDC2D3B676C00CA54A2 /* BusSchedulesWidgetExtension */,
+				1BE5BDCF2D3C8CBC00E07410 /* NextBusWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -533,6 +617,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		1BD3AF172D3776D00040DCD6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1BE5BDCE2D3C8CBC00E07410 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -570,6 +661,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1BE5BDCC2D3C8CBC00E07410 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -592,6 +690,11 @@
 			isa = PBXTargetDependency;
 			target = 1BD3AEF82D3776CE0040DCD6 /* bus_time_scheduler */;
 			targetProxy = 1BD3AF1A2D3776D00040DCD6 /* PBXContainerItemProxy */;
+		};
+		1BE5BDDC2D3C8CBF00E07410 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1BE5BDCF2D3C8CBC00E07410 /* NextBusWidgetExtension */;
+			targetProxy = 1BE5BDDB2D3C8CBF00E07410 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -897,6 +1000,62 @@
 			};
 			name = Release;
 		};
+		1BE5BDDE2D3C8CBF00E07410 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = NextBusWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2A7R4ZP8WU;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NextBusWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NextBusWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.akitorahayashi.bus-time-scheduler.NextBusWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1BE5BDDF2D3C8CBF00E07410 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = NextBusWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2A7R4ZP8WU;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NextBusWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NextBusWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.akitorahayashi.bus-time-scheduler.NextBusWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -941,6 +1100,15 @@
 			buildConfigurations = (
 				1BD3AF2B2D3776D00040DCD6 /* Debug */,
 				1BD3AF2C2D3776D00040DCD6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1BE5BDE02D3C8CBF00E07410 /* Build configuration list for PBXNativeTarget "NextBusWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1BE5BDDE2D3C8CBF00E07410 /* Debug */,
+				1BE5BDDF2D3C8CBF00E07410 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -37,7 +37,6 @@ struct BSFixedTime: Codable, Hashable, Comparable {
         String(format: "%02d:%02d", hour, minute)
     }
     
-    // Comparable プロトコルに準拠するための実装
     static func < (lhs: BSFixedTime, rhs: BSFixedTime) -> Bool {
         if lhs.hour != rhs.hour {
             return lhs.hour < rhs.hour
