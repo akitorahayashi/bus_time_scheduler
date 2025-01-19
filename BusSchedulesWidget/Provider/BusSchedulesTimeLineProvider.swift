@@ -19,36 +19,40 @@ struct BusSchedulesTimeLineProvider: TimelineProvider {
     }
     
     func getTimeline(in context: Context, completion: @escaping (Timeline<BusSchedulesEntry>) -> ()) {
-        
         var entries: [BusSchedulesEntry] = []
-                        
-        let nextBusSchedules = getNextBusSchedules(currentDate: BSDateUtilities.currentDate(), busSchedules: BusSchedulesConstants.busSchedules)
-        
-        var previousEntry: BusSchedulesEntry?
-        
-        for _ in nextBusSchedules {
-            
-            let renderDate: Date
-            
-            if let previousEntry {
-                renderDate = previousEntry.date.addingTimeInterval(1)
-            } else {
-                renderDate = .init()
+        let currentDate = BSDateUtilities.currentDate()
+        let calendar = Calendar.current
+
+        // 現在時刻以降のスケジュールを取得
+        let nextBusSchedules = getNextBusSchedules(currentDate: currentDate, busSchedules: BusSchedulesConstants.busSchedules)
+
+        for schedule in nextBusSchedules {
+            // スケジュールの時刻を生成
+            guard let scheduleDate = calendar.date(bySettingHour: schedule.arrivalTime.hour,
+                                                   minute: schedule.arrivalTime.minute,
+                                                   second: 0,
+                                                   of: currentDate) else {
+                continue
             }
-            
+
+            // スケジュールが現在時刻より過去の場合は翌日のスケジュールとして設定
+            let validScheduleDate = scheduleDate >= currentDate
+                ? scheduleDate
+                : calendar.date(byAdding: .day, value: 1, to: scheduleDate)!
+
+            // タイムラインエントリーを作成
             let entry = BusSchedulesEntry(
-                date: renderDate,
-                busSchedules: nextBusSchedules
+                date: validScheduleDate,
+                busSchedules: [schedule]
             )
             entries.append(entry)
-            previousEntry = entry
         }
-                      
-        // タイムラインを作成
+
+        // タイムラインを生成
         let timeline = Timeline(entries: entries, policy: .atEnd)
-        
         completion(timeline)
     }
+
     
     // 現在時刻から近いバスの7本を取得する関数
     func getNextBusSchedules(

@@ -57,7 +57,7 @@ struct NextBusTimeLineProvider: TimelineProvider {
         let userDefaults = UserDefaults(suiteName: UserDefaultsKeys.suitName.rawValue)
         guard let data = userDefaults?.data(forKey: UserDefaultsKeys.busSchedulesKey.rawValue),
               let busSchedules = try? JSONDecoder().decode([BusSchedule].self, from: data) else {
-            return []
+            return BusSchedulesConstants.busSchedules
         }
         return busSchedules
     }
