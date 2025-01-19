@@ -5,13 +5,11 @@
 //  Created by 林 明虎 on 2025/01/15.
 //
 
-// 競合調査：Yahooの乗換案内
-// 何分ぐらい準備にかかるか記録して何分前に通知
-
 import UIKit
 
 final class TimeListVC: UIViewController {
     private let presenter = BusSchedulePresenter()
+    // component
     private var busScheduleTimeTable: BusScheduleTimeTable
     private let scrollToNextBusButton = CardButton()
     private let fetchButton = UIButton()
@@ -27,44 +25,14 @@ final class TimeListVC: UIViewController {
     }
     
     // MARK: - Lifecycle Methods
+    override func loadView() {
+        super.loadView()
+        setupUI()
+        setupNavigationBar()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // setup UI
-        do {
-            view.backgroundColor = .systemBackground
-            
-            view.addSubview(busScheduleTimeTable)
-            busScheduleTimeTable.translatesAutoresizingMaskIntoConstraints = false
-            
-            scrollToNextBusButton.setTitle("Show next bus on top", for: .normal)
-            scrollToNextBusButton.addTarget(
-                self, action: #selector(scrollToNearestTimeButtonTapped),
-                for: .touchUpInside)
-            scrollToNextBusButton.translatesAutoresizingMaskIntoConstraints = false
-            view.addSubview(scrollToNextBusButton)
-            
-            NSLayoutConstraint.activate([
-                busScheduleTimeTable.topAnchor.constraint(
-                    equalTo: view.safeAreaLayoutGuide.topAnchor),
-                busScheduleTimeTable.leadingAnchor.constraint(
-                    equalTo: view.leadingAnchor),
-                busScheduleTimeTable.trailingAnchor.constraint(
-                    equalTo: view.trailingAnchor),
-                busScheduleTimeTable.bottomAnchor.constraint(
-                    equalTo: scrollToNextBusButton.topAnchor, constant: -20),
-                
-                scrollToNextBusButton.leadingAnchor.constraint(
-                    equalTo: view.leadingAnchor, constant: 20),
-                scrollToNextBusButton.trailingAnchor.constraint(
-                    equalTo: view.trailingAnchor, constant: -20),
-                scrollToNextBusButton.bottomAnchor.constraint(
-                    equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-                scrollToNextBusButton.heightAnchor.constraint(equalToConstant: 50),
-            ])
-        }
-        
-        setupNavigationBar()
         // 1分ごとにテーブルを再読み込みするタイマーを設定
         Timer.scheduledTimer(timeInterval: 60.0, target: self, selector: #selector(reloadBusSchedule), userInfo: nil, repeats: true)
     }
@@ -76,6 +44,38 @@ final class TimeListVC: UIViewController {
         
     }
     
+    private func setupUI() {
+        view.backgroundColor = .systemBackground
+        
+        view.addSubview(busScheduleTimeTable)
+        busScheduleTimeTable.translatesAutoresizingMaskIntoConstraints = false
+        
+        scrollToNextBusButton.setTitle("Show next bus on top", for: .normal)
+        scrollToNextBusButton.addTarget(
+            self, action: #selector(scrollToNearestTimeButtonTapped),
+            for: .touchUpInside)
+        scrollToNextBusButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(scrollToNextBusButton)
+        
+        NSLayoutConstraint.activate([
+            busScheduleTimeTable.topAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.topAnchor),
+            busScheduleTimeTable.leadingAnchor.constraint(
+                equalTo: view.leadingAnchor),
+            busScheduleTimeTable.trailingAnchor.constraint(
+                equalTo: view.trailingAnchor),
+            busScheduleTimeTable.bottomAnchor.constraint(
+                equalTo: scrollToNextBusButton.topAnchor, constant: -20),
+            
+            scrollToNextBusButton.leadingAnchor.constraint(
+                equalTo: view.leadingAnchor, constant: 20),
+            scrollToNextBusButton.trailingAnchor.constraint(
+                equalTo: view.trailingAnchor, constant: -20),
+            scrollToNextBusButton.bottomAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            scrollToNextBusButton.heightAnchor.constraint(equalToConstant: 50),
+        ])
+    }
  
     private func setupNavigationBar() {
         // 中央のタイトル設定
