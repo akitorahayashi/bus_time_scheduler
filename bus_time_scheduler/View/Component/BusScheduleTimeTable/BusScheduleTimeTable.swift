@@ -79,12 +79,19 @@ final class BusScheduleTimeTable: UIView, UITableViewDataSource, UITableViewDele
         
         // AppGroupsに保存
         let userDefaults = UserDefaults(suiteName: UserDefaultsKeys.suitName.rawValue)
+        // busSchedulesを保存
         if let encodedSchedules = try? JSONEncoder().encode(updatedBusSchedules) {
             userDefaults?.set(encodedSchedules, forKey: UserDefaultsKeys.busSchedulesKey.rawValue)
-            userDefaults?.set(selectedIndex, forKey: UserDefaultsKeys.selectedIndexKey.rawValue)
         }
         
-        // ウィジェットを再描画
+        // selectedIndex が nil の場合は削除、それ以外の場合は保存
+        if let selectedIndex = selectedIndex {
+            userDefaults?.set(selectedIndex, forKey: UserDefaultsKeys.selectedIndexKey.rawValue)
+        } else {
+            userDefaults?.removeObject(forKey: UserDefaultsKeys.selectedIndexKey.rawValue)
+        }
+        
+        // NextBusWidgetを再描画
         WidgetCenter.shared.reloadTimelines(ofKind: "NextBusWidget")
         
         // テーブルビューを更新
@@ -93,6 +100,7 @@ final class BusScheduleTimeTable: UIView, UITableViewDataSource, UITableViewDele
         }
         tableView.reloadRows(at: [indexPath], with: .automatic)
     }
+
     
     // MARK: - Reload Data Method
     func reloadData() {

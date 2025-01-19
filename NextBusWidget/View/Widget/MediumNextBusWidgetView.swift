@@ -17,7 +17,7 @@ struct MediumNextBusWidgetView: View {
                 .foregroundColor(.gray)
                 .padding(.bottom, 1)
             
-            SelectedNextBusTimeSection(arrivalTime: entry.selectedBusSchedule?.arrivalTime)
+            SelectedNextBusTimeSection(arrivalTime: entry.arrivalTimeString ?? entry.nextAvailableTime(from: entry.date))
             
             Divider()
                 .padding(.all, 0.2)
@@ -27,7 +27,7 @@ struct MediumNextBusWidgetView: View {
                         .foregroundColor(.accent)
                 )
             
-            CountdownSection(arrivalTime: entry.selectedBusSchedule?.arrivalTime, referenceDate: entry.date)
+            CountdownSection(arrivalTime: entry.arrivalTimeString ?? entry.nextAvailableTime(from: entry.date), referenceDate: entry.date)
         }
         .padding()
     }

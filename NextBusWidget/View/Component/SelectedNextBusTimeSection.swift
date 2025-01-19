@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SelectedNextBusTimeSection: View {
-    let arrivalTime: BSFixedTime?
+    let arrivalTime: String?
 
     var body: some View {
         VStack {
@@ -18,9 +18,10 @@ struct SelectedNextBusTimeSection: View {
                 .foregroundColor(.accent)
             Group {
                 if let arrivalTime = arrivalTime {
-                    Text(arrivalTime.formatted())
+                    // 時間が選択されている場合または最も早い時間がある場合
+                    Text(arrivalTime)
                 } else {
-                    Text("No schedule selected")
+                    Text("N/A")
                 }
             }
             .font(.system(size: 18))

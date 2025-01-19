@@ -21,8 +21,7 @@ struct SmallNextBusWidgetView: View {
                 .padding(.bottom, 1)
             
             VStack(spacing: 8) {
-                
-                SelectedNextBusTimeSection(arrivalTime: entry.selectedBusSchedule?.arrivalTime)
+                SelectedNextBusTimeSection(arrivalTime: entry.arrivalTimeString ?? entry.nextAvailableTime(from: entry.date))
                 
                 Divider()
                     .padding(.all, 1)
@@ -32,7 +31,7 @@ struct SmallNextBusWidgetView: View {
                             .foregroundColor(.accent)
                     )
                 
-                CountdownSection(arrivalTime: entry.selectedBusSchedule?.arrivalTime, referenceDate: entry.date)
+                CountdownSection(arrivalTime: entry.arrivalTimeString ?? entry.nextAvailableTime(from: entry.date), referenceDate: entry.date)
             }
         }
     }
