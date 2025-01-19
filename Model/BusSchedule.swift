@@ -7,7 +7,6 @@
 
 struct BusSchedule {
     var isSelected: Bool
-    // FIXME: use `Date
     let arrivalTime: BSFixedTime
     let delayedTime: BSFixedTime?
     
