@@ -766,6 +766,7 @@
 				DEVELOPMENT_TEAM = 2A7R4ZP8WU;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = bus_time_scheduler/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Bus Scheduler";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -793,6 +794,7 @@
 				DEVELOPMENT_TEAM = 2A7R4ZP8WU;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = bus_time_scheduler/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Bus Scheduler";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

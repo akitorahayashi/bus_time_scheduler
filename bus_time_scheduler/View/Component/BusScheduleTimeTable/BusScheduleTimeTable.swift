@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import WidgetKit
 
 final class BusScheduleTimeTable: UIView, UITableViewDataSource, UITableViewDelegate {
     private let presenter: BusSchedulePresenter
@@ -38,7 +39,7 @@ final class BusScheduleTimeTable: UIView, UITableViewDataSource, UITableViewDele
     }
     
     func scrollToNearestTime() {
-        if let nearestIndex = presenter.nearestScheduleIndex(busSchedules: BusSchedulesConstants.busSchedules, currentTime: BSDateUtilities.currentDate()) {
+        if let nearestIndex = presenter.nearestScheduleIndex(currentTime: BSDateUtilities.currentDate()) {
             DispatchQueue.main.async {
                 self.tableView.scrollToRow(at: IndexPath(row: nearestIndex, section: 0), at: .top, animated: true)
             }
@@ -47,7 +48,6 @@ final class BusScheduleTimeTable: UIView, UITableViewDataSource, UITableViewDele
     
     // MARK: - UITableViewDataSource & UITableViewDelegate
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("numberOfSchedules: \(presenter.numberOfSchedules)")
         return presenter.numberOfSchedules
     }
     
@@ -56,7 +56,7 @@ final class BusScheduleTimeTable: UIView, UITableViewDataSource, UITableViewDele
         
         if let schedule = presenter.busSchedule(at: indexPath.row) {
             // Check if this is the next bus
-            let isNextBus: Bool = presenter.nearestScheduleIndex(busSchedules: BusSchedulesConstants.busSchedules, currentTime: BSDateUtilities.currentDate()) == indexPath.row
+            let isNextBus: Bool = presenter.nearestScheduleIndex(currentTime: BSDateUtilities.currentDate()) == indexPath.row
             cell.configure(with: schedule, isNextBus: isNextBus)
             cell.selectionStyle = .none
         } else {
@@ -67,9 +67,27 @@ final class BusScheduleTimeTable: UIView, UITableViewDataSource, UITableViewDele
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        // 選択されたインデックスを取得
         let currentSelectedIndex = presenter.currentSelectedIndex
+        
+        // Presenterで選択状態を更新
         presenter.toggleSelection(at: indexPath.row)
+        
+        // 保存するデータを取得
+        let updatedBusSchedules = presenter.busSchedules
+        let selectedIndex = presenter.currentSelectedIndex
+        
+        // AppGroupsに保存
+        let userDefaults = UserDefaults(suiteName: UserDefaultsKeys.suitName.rawValue)
+        if let encodedSchedules = try? JSONEncoder().encode(updatedBusSchedules) {
+            userDefaults?.set(encodedSchedules, forKey: UserDefaultsKeys.busSchedulesKey.rawValue)
+            userDefaults?.set(selectedIndex, forKey: UserDefaultsKeys.selectedIndexKey.rawValue)
+        }
+        
+        // ウィジェットを再描画
+        WidgetCenter.shared.reloadTimelines(ofKind: "NextBusWidget")
+        
+        // テーブルビューを更新
         if let currentSelectedIndex {
             tableView.reloadRows(at: [.init(row: currentSelectedIndex, section: 0)], with: .automatic)
         }
@@ -78,7 +96,6 @@ final class BusScheduleTimeTable: UIView, UITableViewDataSource, UITableViewDele
     
     // MARK: - Reload Data Method
     func reloadData() {
-        // テーブルビューをリロード
         DispatchQueue.main.async { [weak self] in
             self?.tableView.reloadData()
         }
